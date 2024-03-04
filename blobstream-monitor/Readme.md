@@ -28,5 +28,12 @@ The resulting JSON file, orchestrator_test.json, will contain the following data
 
 This JSON structure encapsulates critical details such as the nonce, begin and end block numbers, data root tuple root, UTC timestamp, error status, counts of errors and warnings, as well as logs for errors and warnings, if any exist.
 
+### Views
+
+
 ### Services
-monitor_orchestrator.service
+[monitor_orchestrator.service](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/services/monitor_orchestrator.service) A systemd service that executes the monitor_orchestrator_json.sh script. This service ensures that the Orchestrator monitoring is performed regularly and automatically.
+
+[monitor_orchestrator.timer](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/services/monitor_orchestrator.timer) A systemd timer that controls the periodic execution of the monitor_orchestrator.service service. It allows defining specific intervals for monitoring the Orchestrator.
+
+
