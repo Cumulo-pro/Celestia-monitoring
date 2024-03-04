@@ -28,3 +28,5 @@ The resulting JSON file, orchestrator_test.json, will contain the following data
 
 This JSON structure encapsulates critical details such as the nonce, begin and end block numbers, data root tuple root, UTC timestamp, error status, counts of errors and warnings, as well as logs for errors and warnings, if any exist.
 
+### Services
+monitor_orchestrator.service
