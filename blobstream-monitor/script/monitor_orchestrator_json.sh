@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Path of the output JSON file
-json_file="/home/dedicaovh/orchestrator_info/orchestrator_test.json"
+json_file="orchestrator_test.json"
 # Define the time interval to search for errors (last 5 minutes)
 interval="5 min ago"
 
