@@ -10,5 +10,19 @@ The Blobstream Orchestrator Monitor is a set of tools designed to monitor the st
 
 ## Components
 ### Scripts
-*[monitor_orchestrator_json.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/script/monitor_orchestrator_json.sh)*
-This Bash script is responsible for gathering information from the Blobstream Orchestrator and generating a JSON file with the obtained data. It extracts the latest signed commitments and checks for errors in the service logs.
+*[monitor_orchestrator_json.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/script/monitor_orchestrator_json.sh)* is responsible for collecting vital information from the Blobstream Orchestrator and then crafting a JSON file encapsulating the gathered data. It primarily focuses on retrieving the latest signed commitments and conducting an error check within the service logs.
+The resulting JSON file, orchestrator_test.json, will contain the following dataset:
+
+<code>{
+  "nonce": "3621",
+  "begin_block": "=1309201",
+  "end_block": "=1309601",
+  "data_root_tuple_root": "=0x30708fe2aa5da760bce10d159de0c5753870d62d0ee563f19acb1e79cf8531c2",
+  "data_utc": "2024-03-04 18:48:27",
+  "has_errors": "false",
+  "error_count": "0",
+  "warning_count": "0",
+  "error_logs": "\\n",
+  "warning_logs": "\\n"
+}</code>
+
