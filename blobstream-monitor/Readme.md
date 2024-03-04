@@ -5,3 +5,10 @@ This allows Ethereum developers to build high-throughput L2s using advanced data
 
 +info: https://blog.celestia.org/introducing-blobstream/
 
+## Description
+The Blobstream Orchestrator Monitor is a set of tools designed to monitor the status of the Blobstream Orchestrator service. These tools allow collecting important information such as the latest signed commitments, detecting errors in the service logs, and sending alerts via Telegram in case of issues detection.
+
+## Components
+### Scripts
+*monitor_orchestrator_json.sh*
+This Bash script is responsible for gathering information from the Blobstream Orchestrator and generating a JSON file with the obtained data. It extracts the latest signed commitments and checks for errors in the service logs.
