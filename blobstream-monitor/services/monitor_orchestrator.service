@@ -1,0 +1,12 @@
+[Unit]
+Description=Monitor Orchestrator Logs and Summarize in JSON
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/monitor_orchestrator_json.sh
+Restart=on-failure
+RestartSec=5min
+
+[Install]
+WantedBy=multi-user.target
