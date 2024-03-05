@@ -42,4 +42,22 @@ You can see an example here:
 
 [monitor_orchestrator.timer](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/services/monitor_orchestrator.timer) A systemd timer that controls the periodic execution of the monitor_orchestrator.service service. It allows defining specific intervals for monitoring the Orchestrator.
 
+## Configuration
+### Telegram settings
 
+
+### Installation and Configuration
+1. Clone this repository on your server.
+2.	Place the scripts in the corresponding directories on your system (/usr/local/bin/ for example).
+3.	Make sure the scripts have proper execution permissions (sudo chmod +x script.sh).
+4.	Configure the systemd services according to the instructions provided in the configuration files.
+5.	Configure the timer to control the periodic execution of monitoring.
+
+## Use
+Once configured, the services will run automatically according to the defined timer. The generated JSON file will be periodically updated with the current status of the Orchestrator. In addition, you will receive alerts via Telegram in case of detected errors or warnings.
+
+## Contribute
+If you want to contribute to this project, feel free to submit pull requests or report issues in the GitHub repository.
+
+## Support
+If you need help with configuration or have any questions about how the Blobstream Orchestrator Monitor works, feel free to contact the Cumulo team.
