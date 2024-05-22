@@ -15,6 +15,7 @@ Block Size (bytes)
 Nº Transactions Committed
 Total txs  
 Missing Validators Power  
+Nº Validators missing blocks 
 
 
 
@@ -139,4 +140,14 @@ Total power of missing validators in the Celestia consensus system. Missing vali
 Value: numeric value representing the total power of the missing validators in the Celestia consensus system. A low or zero value is desirable, as it suggests active and healthy participation of validators in the consensus process.
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/6102d610-0d26-4df8-b755-2fc969b34e49)
+
+## Nº Validators missing blocks 
+
+**celestia_consensus_missing_validators** 
+
+Validator signatures are essential to validate and ensure the integrity of blocks on the blockchain. This metric can provide information on how many validators are not actively participating in the consensus process at any given time. A low or zero value is desirable, as it suggests high participation and cooperation of validators in the network. 
+
+Value: number of validators who did not sign in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/41b993fc-a560-4c6c-a426-c35be74d82f7)
 
