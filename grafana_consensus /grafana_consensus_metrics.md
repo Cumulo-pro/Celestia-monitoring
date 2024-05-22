@@ -1,9 +1,7 @@
 # Grafana consensus & validator metrics 
 
-- [SYNC STATUS](#sync-status) 
-
+- [Sync Status](#sync-status)
 - [State Syncing](#state-syncing)
-
 - [Node Last Signed Height](#node-last-signed-height)
 - [Node Voting Power](#node-voting-power)
 - [Connected Peers & P2P Peers](#connected-peers--p2p-peers)
@@ -17,13 +15,22 @@
 - [Nº Validators Missing Blocks](#nº-validators-missing-blocks)
 - [Total Bonded Tokens](#total-bonded-tokens)
 - [Consensus Validators](#consensus-validators)
-
-Consensus Step Duration 
-Block Processing Time  
-Interval between Consensus Blocks
-Number of block parts received
-Block Interval Seconds Sum
-
+- [Consensus Step Duration](#consensus-step-duration)
+- [Block Processing Time](#block-processing-time)
+- [Interval between Consensus Blocks](#interval-between-consensus-blocks)
+- [Number of Block Parts Received](#number-of-block-parts-received)
+- [Block Interval Seconds Sum](#block-interval-seconds-sum)
+- [Block Interval Seconds Count](#block-interval-seconds-count)
+- [Mempool Size](#mempool-size)
+- [Duplicate Transactions in Mempool](#duplicate-transactions-in-mempool)
+- [Mempool tx Size Bytes Sum](#mempool-tx-size-bytes-sum)
+- [Mempool Size Bytes](#mempool-size-bytes)
+- [Txs Evicted Mempool](#txs-evicted-mempool)
+- [Txs Failed Mempool](#txs-failed-mempool)
+- [Process CPU Seconds Total](#process-cpu-seconds-total)
+- [Current Process Virtual Memory Usage](#current-process-virtual-memory-usage)
+- [Current Process Resident Memory Usage](#current-process-resident-memory-usage)
+- [Duration of Garbage Collection Pauses in Go](#duration-of-garbage-collection-pauses-in-go)
 _________________________________________________________________________
 
 ## SYNC STATUS 
@@ -227,4 +234,125 @@ This metric represents the sum total of the time elapsed between consecutive blo
 Value: time between consecutive blocks in the Celestia system, measured in seconds
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/daf51068-0f50-4a35-a6f4-f00921ae1e87)
+
+##  Block Interval Seconds Count  
+
+**celestia_consensus_block_interval_seconds_count**
+
+Total number of times a time interval between blocks has been observed in the Celestia system. It provides a measure of how often blocks are produced in the network. A higher count may indicate high block generation activity, while a low count may indicate block generation problems or long intervals between blocks.
+
+Value: total number of times a time interval between blocks has been observed in the Celestia system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/4da6a869-1fd1-4a23-a018-06b987c2ba59)
+
+##  Mempool size 
+
+**celestia_mempool_size** 
+
+Shows how many transactions are currently pending confirmation in the mempool, i.e. how many transactions are waiting to be included in a block.
+
+Value: number of transactions pending confirmation that have not yet been included in a block
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/a2b4bd1e-18c2-4ce1-ba4e-b8ba02636942)
+
+
+##  Duplicate Transactions in Mempool  
+
+**celestia_mempool_already_seen_txs** 
+
+Number of transactions that have entered the mempool in the Celestia system, but were already present in the mempool at the time. Essentially, these transactions are not new, as they have been observed before and are kept in the mempool. This can be useful in understanding the efficiency of handling duplicate transactions in the system. 
+
+Value: number of transactions already present in the mempool 
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/616bb9c8-2de9-4e8e-9072-129375d2ad67)
+
+## Mempool Size Bytes  
+
+**celestia_mempool_size_bytes**
+
+Total size of the mempool in bytes in the Celestia system. The mempool stores transactions pending processing before they are included in a block and added to the blockchain. A larger mempool may indicate high transaction activity or network congestion, while a smaller mempool may indicate lower activity or transaction processing efficiency.
+
+Value: total mempool size in bytes
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/85271cd9-4e6d-42ab-8cb1-174bdec5d4b8)
+
+## Mempool tx Size Bytes Sum 
+
+**celestia_mempool_tx_size_bytes_sum**
+
+The sum total of the size of all transactions in bytes present in the Celestia system mempool. It provides a measure of the total volume of transaction data pending processing on the network. A larger transaction size may indicate complex transactions or transactions with a large amount of attached data. 
+
+Value: total sum of the size of all transactions in bytes in the mempool
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/70763bef-023c-4692-a104-8895c112380a)
+
+## Txs evicted mempool 
+
+**celestia_mempool_evicted_txs**
+
+Number of transactions expelled from the mempool because they have reached the end of their useful lifetime
+
+Value: number of transactions ejected from the mempool due to reaching the time to live (TTL)
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/f0296d0d-af49-4eb8-aea9-afef78953119)
+
+## Txs failed mempool
+
+**celestia_mempool_failed_txs** 
+
+This metric indicates how many transactions have failed to be added ("added") to the mempool and how many have failed to be rechecked.
+
+Value: number of transactions that have failed in the mempool. 
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/306ff534-2171-47ea-a214-b1e31b44e2d7)
+
+## Nº Revisions in the Mempool 
+
+**celestia_mempool_recheck_times**
+
+Indicates how many times transactions have been reviewed again in the mempool before being included in a block or ejected.
+
+Value: number of times transactions are reviewed again in the mempool.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/86faa4b5-0d5b-40e1-ac38-4dd531a16544)
+
+## Process CPU Seconds Total
+
+**process_cpu_seconds_total**
+
+This metric records the total time, in seconds, spent by both the user and the operating system in executing a specific process.
+
+Value: total time in CPU seconds consumed by the process since its start.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/af673f3f-c608-4983-a78e-d6961c264796)
+
+## Current Process Virtual Memory Usage
+
+**process_virtual_memory_bytes**
+
+Total amount of virtual memory used by the process in bytes
+
+Value: number indicating the size of virtual memory in bytes
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/0af2e720-45d9-469b-964e-52d36e53cd6b)
+
+## Current Process Resident Memory Usage 
+
+**process_resident_memory_bytes**
+
+This metric records the size of resident memory in bytes used by the process.
+
+Value: Size of resident memory in bytes used by the process.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/871c02a8-843e-443d-ae71-1eec1535dd79)
+
+## Duration of Garbage Collection Pauses in Go 
+
+**go_gc_duration_seconds_sum** 
+
+This metric is useful for monitoring rubbish collector performance in programs written in Go, which can help identify potential bottlenecks or performance issues related to memory management.
+
+Value: value of the cumulative sum of the durations of refuse collection breaks.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/ff1950ff-b631-44ad-9132-1b3c59d889af)
 
