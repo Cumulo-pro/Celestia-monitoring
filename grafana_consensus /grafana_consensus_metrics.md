@@ -16,6 +16,8 @@ Nº Transactions Committed
 Total txs  
 Missing Validators Power  
 Nº Validators missing blocks 
+Total bonded tokens
+Consensus Validators
 
 
 
@@ -150,4 +152,25 @@ Validator signatures are essential to validate and ensure the integrity of block
 Value: number of validators who did not sign in the Celestia consensus system
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/41b993fc-a560-4c6c-a426-c35be74d82f7)
+
+##  Total bonded tokens  
+
+**celestia_consensus_validators_power**  
+
+A measure indicating the total combined power of all active validators in the Celestia consensus system. The power of validators refers to their collective influence on the consensus process and can be determined by several factors, such as the amount of participation in the network, the reputation of the validator and other criteria set by the consensus protocol. This metric provides an overview of the accumulated power of validators in the network at a given time, which can be useful for assessing the security and robustness of the consensus system.
+
+Value: number representing the total power of all validators in the Celestia consensus system.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/de94b3c0-55d8-43a9-be37-cbe1ef890830)
+
+##  Consensus Validators  
+
+**celestia_consensus_validators{job="$job"}**
+
+Total number of active validators in the Celestia consensus
+
+Value: number of active validators
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/72495e12-3998-4012-8c9d-e00787656a57)
+
 
