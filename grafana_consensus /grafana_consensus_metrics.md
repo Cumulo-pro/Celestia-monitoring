@@ -14,6 +14,7 @@ Consensus Height
 Block Size (bytes) 
 Nº Transactions Committed
 Total txs  
+Missing Validators Power  
 
 
 
@@ -128,3 +129,14 @@ Total number of transactions processed in the Celestia consensus system since in
 Value: a numeric value representing the total number of transactions processed so far in the Celestia consensus system
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/0d83c2b8-bc2e-44d9-9504-261df31d5d96)
+
+## Missing Validators Power  
+
+**celestia_consensus_missing_validators_power** 
+
+Total power of missing validators in the Celestia consensus system. Missing validators refer to those who are not active or are not participating in the consensus process at a given time. This metric can provide information about the health and integrity of the network, as a significant missing validator power could indicate problems with the participation or availability of validator nodes in the network. 
+
+Value: numeric value representing the total power of the missing validators in the Celestia consensus system. A low or zero value is desirable, as it suggests active and healthy participation of validators in the consensus process.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/6102d610-0d26-4df8-b755-2fc969b34e49)
+
