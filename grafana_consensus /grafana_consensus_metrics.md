@@ -4,22 +4,27 @@
 
 - [State Syncing](#state-syncing)
 
-- [Node Last Signed Height](https://github.com/Cumulo-pro/Celestia-monitoring/edit/main/grafana_consensus%20/grafana_consensus_metrics.md#node-last-signed-height)  
+- [Node Last Signed Height](#node-last-signed-height)
+- [Node Voting Power](#node-voting-power)
+- [Connected Peers & P2P Peers](#connected-peers--p2p-peers)
+- [Height Consensus Monitoring](#height-consensus-monitoring)
+- [Block Time](#block-time)
+- [Consensus Height](#consensus-height)
+- [Block Size (bytes)](#block-size-bytes)
+- [Nº Transactions Committed](#nº-transactions-committed)
+- [Total Txs](#total-txs)
+- [Missing Validators Power](#missing-validators-power)
+- [Nº Validators Missing Blocks](#nº-validators-missing-blocks)
+- [Total Bonded Tokens](#total-bonded-tokens)
+- [Consensus Validators](#consensus-validators)
 
-Node Voting Power 
-Connected peers & P2P peers  
-Height  Consensus Monitoring
-Block time  
-Consensus Height  
-Block Size (bytes) 
-Nº Transactions Committed
-Total txs  
-Missing Validators Power  
-Nº Validators missing blocks 
-Total bonded tokens
-Consensus Validators
+Consensus Step Duration 
+Block Processing Time  
+Interval between Consensus Blocks
+Number of block parts received
+Block Interval Seconds Sum
 
-
+_________________________________________________________________________
 
 ## SYNC STATUS 
 
@@ -173,4 +178,53 @@ Value: number of active validators
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/72495e12-3998-4012-8c9d-e00787656a57)
 
+##  Consensus Step Duration 
+
+**celestia_consensus_step_duration_seconds_bucket**
+
+This metric provides detailed information on the time spent on each step of the consensus process in the Celestia system. 
+
+Value: histogram recording the time spent on each step of the consensus process in the Celestia system.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/a53e2e61-2c54-4e6b-b69f-eb5ca9fb5011)
+
+##  Block Processing Time  
+
+**increase(celestia_state_block_processing_time_sum[$__rate_interval])**
+
+This metric records the time taken by Celestia to process a status block, from BeginBlock to EndBlock, measured in milliseconds. It represents the total duration of operations performed during the processing of the status block in the Celestia system. A high value may indicate slower processing, which could affect the ability of the network to maintain optimal performance.
+
+Value: time between BeginBlock and EndBlock in milliseconds in the Celestia system.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/ce7f059f-d9a6-4f82-8fb8-298e55afe546)
+
+##  Interval between Consensus Blocks  
+
+**celestia_consensus_block_interval_seconds_bucket**
+
+This metric records the time that elapses between the production of consecutive blocks in the Celestia system, measured in seconds. It helps to understand how often new blocks are being generated in the network. For example, if there is a bucket for intervals of up to 10 seconds, it means that most blocks are being produced in that time period or less. This can be useful for assessing the efficiency and speed of the block generation process in the network.
+
+Value: Histogram recording the time between consecutive blocks in seconds in the Celestia system.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/0f5b8cdc-1d0e-48d8-b795-f5fb45a76673)
+
+##  Number of block parts received  
+
+**celestia_consensus_block_gossip_parts_received** 
+
+This metric counts the number of block parts received by a node in the Celestia system through gossip messages. Each share may or may not be relevant to the block that the node is currently collecting, and this information is recorded with the matches_current tag. This can be useful to monitor the amount of data the node is receiving during the block gathering process and to understand whether the received parties are relevant to the current block.
+
+Value: number of block parts received by the node
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/5c3b114e-b765-4bdd-9490-9f9edb2f7591)
+
+##  Block Interval Seconds Sum
+
+**celestia_consensus_block_interval_seconds_sum**
+
+This metric represents the sum total of the time elapsed between consecutive blocks in the Celestia system, measured in seconds. It provides a cumulative view of the time spent between the production of each pair of successive blocks. A higher value could indicate a slowdown in block production or longer intervals between blocks.
+
+Value: time between consecutive blocks in the Celestia system, measured in seconds
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/daf51068-0f50-4a35-a6f4-f00921ae1e87)
 
