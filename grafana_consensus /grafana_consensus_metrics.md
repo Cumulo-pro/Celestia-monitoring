@@ -8,10 +8,9 @@
 
 Node Voting Power 
 Connected peers & P2P peers  
-
-
-
-
+Height  Consensus Monitoring
+Block time  
+Consensus Height  
 
 
 ## SYNC STATUS 
@@ -65,4 +64,34 @@ Value: numeric value indicating the nodes connected as peers
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/52b14295-e199-41fb-abe8-1d65dc64092f)
 
+## Height  Consensus Monitoring  
+
+**celestia_consensus_start_height**  
+
+Block height from which consensus-related metrics began to be recorded in the Celestia consensus system. This metric provides information about the reference point from which consensus related data is being collected and analysed in the network. The numerical value represents this starting height.  
+
+Value: numeric value indicating the height from which metrics started in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/e7698318-f927-467b-9989-b2ddf9e8327b)
+
+
+## Block time  
+
+**celestia_consensus_block_time_seconds**  
+
+Average time between the creation of consecutive blocks in the Celestia consensus system, expressed in seconds. This metric is critical for assessing the efficiency and health of the network, as a lower block time may indicate a faster and more responsive network, while a higher block time may indicate possible congestion problems or slowness in the consensus process.
+
+Value: average block time in seconds in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/52f36a64-b33a-4b13-852c-932e6abb2337)
+
+## Consensus Height  
+
+**celestia_consensus_height**  
+
+Current block height in the Celestia consensus system. This metric provides information on the progress of the blockchain in terms of confirmed blocks. It is a fundamental metric for monitoring the status and activity of the network, as it reflects where the consensus is in the blockchain at any given point in time.  
+
+Value: numeric value representing the current height of the block in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/049da3ad-0c28-4bdf-bdf2-dfbb2858685f)
 
