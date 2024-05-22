@@ -13,6 +13,7 @@ Block time
 Consensus Height  
 Block Size (bytes) 
 Nº Transactions Committed
+Total txs  
 
 
 
@@ -118,4 +119,12 @@ Value: Numeric value representing the number of transactions included in the las
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/aa355eb9-73a3-44dd-80d4-12e2d49b9749)
 
+## Total txs  
 
+**celestia_consensus_total_txs** 
+
+Total number of transactions processed in the Celestia consensus system since inception. This metric is essential to understand the cumulative activity of the network and the total volume of transactions completed. Tracking the total number of transactions can provide insight into the growth and adoption of the network over time.
+
+Value: a numeric value representing the total number of transactions processed so far in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/0d83c2b8-bc2e-44d9-9504-261df31d5d96)
