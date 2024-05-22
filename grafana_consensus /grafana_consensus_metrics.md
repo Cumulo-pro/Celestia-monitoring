@@ -12,7 +12,7 @@ Height  Consensus Monitoring
 Block time  
 Consensus Height  
 Block Size (bytes) 
-
+Nº Transactions Committed
 
 
 
@@ -106,7 +106,16 @@ Size of the last block in the Celestia consensus system, expressed in bytes. The
 
 Value: block size in bytes in the Celestia consensus system
 
-![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/5011bea8-2c2e-4ae4-90c9-c0be42997a90)
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/f8741bf7-3622-4c4e-a58e-fe6ef07eeb91)
 
+## Nº Transactions Committed  
+
+**celestia_consensus_num_txs** 
+
+Number of transactions included in the last block in the Celestia consensus system. This metric is crucial for understanding the activity and volume of transactions on the network at any given time. A higher number of transactions may indicate higher network activity, while a low or zero number may reflect periods of low network activity or congestion.
+
+Value: Numeric value representing the number of transactions included in the last block
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/aa355eb9-73a3-44dd-80d4-12e2d49b9749)
 
 
