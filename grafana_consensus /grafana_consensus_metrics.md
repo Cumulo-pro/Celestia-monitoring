@@ -11,6 +11,9 @@ Connected peers & P2P peers
 Height  Consensus Monitoring
 Block time  
 Consensus Height  
+Block Size (bytes) 
+
+
 
 
 ## SYNC STATUS 
@@ -94,4 +97,16 @@ Current block height in the Celestia consensus system. This metric provides info
 Value: numeric value representing the current height of the block in the Celestia consensus system
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/049da3ad-0c28-4bdf-bdf2-dfbb2858685f)
+
+## Block Size (bytes)  
+
+**celestia_consensus_block_size_bytes**  
+
+Size of the last block in the Celestia consensus system, expressed in bytes. The block size is important for understanding the network's ability to handle transactions and data, as well as for assessing the efficiency of the consensus protocol in terms of block propagation and confirmation. 
+
+Value: block size in bytes in the Celestia consensus system
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/5011bea8-2c2e-4ae4-90c9-c0be42997a90)
+
+
 
