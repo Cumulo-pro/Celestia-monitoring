@@ -3,7 +3,14 @@
 
 This is a step-by-step tutorial on how to set up the monitoring of a consensus node & validator for the Celestia blockchain, with Prometheus and Grafana.
 
+## Table of Contents
 
+1. [First steps](#first-steps)
+2. [Install Prometheus](#install-prometheus)
+3. [Create an account on Grafana](#create-an-account-on-grafana)
+4. [Install Grafana](#install-grafana)
+5. [Setting up Prometheus](#setting-up-prometheus)
+6. [Final adjustments](#final-adjustments)
 _________________________________________________________________________________________________________________
 
 ## First steps
@@ -112,19 +119,19 @@ sudo systemctl start prometheus
 sudo systemctl status prometheus
 ```
 
-If Prometheus is running successfully, you should have a status screen that looks like this. Press CTL+C to exit the systemctl status screen.
+If Prometheus is running successfully, you should have a status screen that looks like this. Press CTL+C to exit the systemctl status screen.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/7650225e-cc8b-42cd-bded-5fa5b4d6e243)
 
 Now we can access the Prometheus interface by accessing the ip of the server where we have installed it:
-**(ip node Prometheus):9090/status**  
+**(ip node Prometheus):9090/status**    
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/2e17f394-24ba-4e6a-bedc-fc405d045cb9)
 
 You can start querying Prometheus in the Graph section, using the Celestia metrics functions, which can be found here:
 [Grafana Consensus Metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/grafana_consensus_metrics.md)
 
-**(ip nodo Prometheus):9090/graph**  
+**(ip nodo Prometheus):9090/graph**   
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b7679564-e665-481d-9af5-1e1ac20a0f64)
-
+  
 Congratulations! You now have a running Prometheus server. We'll come back to it for additional configuration.
 
 _____________________________________________________________________________________________________
@@ -155,7 +162,7 @@ Install Grafana and update your packages
 sudo apt-get install -y adduser libfontconfig1
 wget https://dl.grafana.com/enterprise/release/grafana-enterprise_9.3.2_amd64.deb
 sudo dpkg -i grafana-enterprise_9.3.2_amd64.deb
-```
+```  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/441d7e1d-e7d6-4891-bba9-10932ac40767)
 
 **Start the server with SystemD**
@@ -169,14 +176,14 @@ sudo systemctl status grafana-server
 Configure the Grafana server to start at boot time:
 ```bash
 sudo systemctl enable grafana-server.service
-```
-![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/531adddf-2cab-4977-bb9b-625cc8a47786)
+```  
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/531adddf-2cab-4977-bb9b-625cc8a47786)  
 
 Now open a web browser and navigate to http://your_grafana_ip:3000 and you should see the Grafana home page. 
-To log in your initial username is admin and your password is admin.
+To log in your initial username is admin and your password is admin.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/aa4b260c-c4f0-4ed7-a92f-b4379fa87939)
 
-The next step will ask you to change your password:
+The next step will ask you to change your password:  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/a40217cb-f1a3-4d1d-a85b-5f7db315acca)
 
 After changing your password, log in to the Grafana website to download a dashboard in JSON format.
@@ -185,30 +192,30 @@ You can search or download our Celestia Consensus metrics by Cumulo dashboard to
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/4874894b-a4d2-4090-a270-64aa6c3ca51b)
 
-Go back to the Grafana page of your server and click on Configuration and then Data Sources.
+Go back to the Grafana page of your server and click on Configuration and then Data Sources.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b2a18e7e-326b-4d63-ae54-7f527119877d)
 
-Now click on Add data source and select the Prometheus data source.
+Now click on Add data source and select the Prometheus data source.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/a5eea04b-8da2-4bd0-8f12-28fc39bf9098)
 
 Now enter the IP address with port 9090. If you have decided to run Prometheus and Grafana on the same server, type http://localhost:9090
-If you have separated Grafana and Prometheus into two servers, then enter the IP address of Prometheus.
+If you have separated Grafana and Prometheus into two servers, then enter the IP address of Prometheus.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/0919db0e-9168-4ab8-a0e6-4dc4936bddcd)
 
-Scroll to the bottom and click the Save & Test button.
+Scroll to the bottom and click the Save & Test button.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b5adf022-72c4-4603-87db-48316fa71eff)
 
-If you have entered the correct IP and your Prometheus firewall is open on port 9090, you will see a successful connection indicator.
+If you have entered the correct IP and your Prometheus firewall is open on port 9090, you will see a successful connection indicator.  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/c5b8f8a5-bca0-4e67-bfbd-770986fbbf53)
 
-Now click on Dashboard and then on Manage:
+Now click on Dashboard and then on Manage:  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/a34abcaa-8550-4d02-b5a0-1720c0667f20)
 
-Now click on Import and then on Upload JSON file.
+Now click on Import and then on Upload JSON file.  
 Upload the JSON file you downloaded earlier, then select the Prometheus data source you just configured and click the +Import button.
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/57ff3cca-fadf-4790-9ab4-e6ceb9c4d451)
 
-Congratulations! You now have a control panel, for the moment it has no data:
+Congratulations! You now have a control panel, for the moment it has no data:  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/f9778e0d-508c-4932-bc92-96a3e7831130)
 
 Now we have to configure the panel to start displaying data.
