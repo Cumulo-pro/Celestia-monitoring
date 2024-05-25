@@ -116,13 +116,13 @@ If Prometheus is running successfully, you should have a status screen that look
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/7650225e-cc8b-42cd-bded-5fa5b4d6e243)
 
 Now we can access the Prometheus interface by accessing the ip of the server where we have installed it:
-**(ip node Prometheus):9090/status**
+**(ip node Prometheus):9090/status**  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/2e17f394-24ba-4e6a-bedc-fc405d045cb9)
 
 You can start querying Prometheus in the Graph section, using the Celestia metrics functions, which can be found here:
 [Grafana Consensus Metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/grafana_consensus_metrics.md)
 
-**(ip nodo Prometheus):9090/graph**
+**(ip nodo Prometheus):9090/graph**  
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b7679564-e665-481d-9af5-1e1ac20a0f64)
 
 Congratulations! You now have a running Prometheus server. We'll come back to it for additional configuration.
@@ -130,7 +130,7 @@ Congratulations! You now have a running Prometheus server. We'll come back to it
 _____________________________________________________________________________________________________
 
 ## Create an account on Grafana
-It is advisable to create an account on the Grafana web platform to be able to access documentation, download dashboards and other plugins, etc.
+It is advisable to create an account on the Grafana web platform to be able to access documentation, download dashboards and other plugins, etc.  
 [Grafana](https://grafana.com/)
 
 ## Install Grafana
