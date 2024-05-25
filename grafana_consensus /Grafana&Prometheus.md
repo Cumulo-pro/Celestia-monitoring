@@ -9,7 +9,7 @@ ________________________________________________________________________________
 ## First steps
 ✔️ Before you start, you need to make sure that prometheus is enabled in your validator node by checking the value of the variable in:
 .celestia-app/config/config.toml  
-
+ 
 ```prometheus=true```   
 
 ✔️ Specify your listening port (26660) and be sure to open it in your Firewall.
