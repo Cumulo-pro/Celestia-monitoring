@@ -52,3 +52,39 @@ Value: numerical value, 1 is established
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/28733321-9ed9-405a-b178-fdcb99e309b8)
 
+## Consensus Height
+
+*celestia_consensus_height*
+
+Current height of the block in the Celestia consensus system
+
+Value: numerical value representing the block
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b477fd8e-ddd1-457b-9f6a-71898ebaacb4)
+
+## SYNC STATUS
+
+*celestia_consensus_fast_syncing*
+
+Consensus node syncing. Either NO SYNC (not block syncing) or SYNC (syncing)
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/5e240448-24fa-4ae7-8040-1651e2d7d5e9)
+
+## Node Last Signed Height
+
+*celestia_consensus_validator_last_signed_height*
+
+Last height the node signed a block, if consensus node is a validator
+Value: The recommended value for the consensus node connected to the bridge is NO VALIDATOR
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/439286c1-e26c-40d0-94ec-e29b0d32d20b)
+
+## State Syncing
+
+*celestia_consensus_state_syncing*
+
+Indicates whether a consensus node is synchronising its state
+
+Value: FALSE for synchronised nodes
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/241548f6-3c73-4615-aa4c-93a063ab6015)
