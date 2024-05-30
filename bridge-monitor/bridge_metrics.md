@@ -107,5 +107,14 @@ Num second from last date timeout occurred while waiting for network connectivit
 
 Value: num second from last timeout
 
-![Uploading image.png…]()
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/550713b2-683e-4eaa-8a50-e3f44743e438)
 
+## Num Failed to parse timestamp
+
+*num_failed _parse_timestamp*
+
+Counting the number of timestamp analysis errors. This message indicates an error when trying to parse a timestamp in a record. A problem may have occurred with the format of the timestamp.
+
+Value: numerical value representing number timestamp analysis errors
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/1e844cea-1639-4daf-b2c7-76c21705b747)
