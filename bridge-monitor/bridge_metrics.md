@@ -128,3 +128,23 @@ Num second from last Failed to parse timestamp
 Value: num second from last Failed
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/ebc34799-8ea6-4199-9ea8-fb86e7ef3491)
+
+## Num Connection closed by remote host
+
+*num_closed_remote_host*
+
+Counting the number of closed by remote host
+
+Value: numerical value representing number closed
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/90ab1cf7-d351-4b92-8e74-3e1acda966df)
+
+## Time Last Connection closed by remote host
+
+*Time Last Connection closed by remote host*
+
+Num second from last Connection closed by remote host
+
+Value: num second from last Connection closed
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/65d998d4-d72e-4552-94b5-89e6e801f981)
