@@ -117,4 +117,14 @@ Counting the number of timestamp analysis errors. This message indicates an erro
 
 Value: numerical value representing number timestamp analysis errors
 
-![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/1e844cea-1639-4daf-b2c7-76c21705b747)
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/b82254fc-9cea-4ee6-9da5-5df0b8caa677)
+
+## Last Failed to parse timestamp:
+
+*last_failed _parse_timestamp*
+
+Num second from last Failed to parse timestamp
+
+Value: num second from last Failed
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/ebc34799-8ea6-4199-9ea8-fb86e7ef3491)
