@@ -148,3 +148,20 @@ Num second from last Connection closed by remote host
 Value: num second from last Connection closed
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/65d998d4-d72e-4552-94b5-89e6e801f981)
+
+## Cache life expectancy (in seconds)
+
+*cache_life_expectancy*
+
+Frequency distribution for cache life expectancy, expressed in seconds.
+
+Here is a detailed interpretation of each of the data provided:
+
+•	Min value: 0. The minimum value of the cache life expectancy is 0 seconds.
+•	Max value: 10008. The maximum value of the cache life expectancy is 10008 seconds.
+•	Count: 215909. The total number of entries in the metric is 215909.
+•	50p: 2.00. The 50th percentile (median) cache life expectancy is 2 seconds.
+•	75p: 2.00. The 75th percentile of the cache life expectancy is 2 seconds.
+•	90p: 16.00. The 90th percentile of the cache life expectancy is 16 seconds.
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/e08cba4c-35ca-4ec3-897f-1c731121fec3)
