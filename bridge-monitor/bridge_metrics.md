@@ -88,3 +88,24 @@ Indicates whether a consensus node is synchronising its state
 Value: FALSE for synchronised nodes
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/241548f6-3c73-4615-aa4c-93a063ab6015)
+
+## Num Timeout Connectivity
+
+*num_err_timeout_connectivity*
+
+Number of times network connectivity has timed out
+
+Value: numerical value representing number times time out
+
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/9e7416b7-e04a-4d06-9b0c-91fb2336beb9)
+
+## Last Timeout Connectivity
+
+*time_last_err_timeout_connectivity*
+
+Num second from last date timeout occurred while waiting for network connectivity. Indicates that the system attempted to wait for network connectivity, but reached a timeout without success.
+
+Value: num second from last timeout
+
+![Uploading image.png…]()
+
