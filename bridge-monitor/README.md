@@ -36,4 +36,7 @@ With these features, this project provides an efficient and effective solution f
 
 This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
+[Grafana Dashboard JSON Configuration File](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/Celestia%20Bridge%20Node-1717086106232.json)
+
+This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
 
