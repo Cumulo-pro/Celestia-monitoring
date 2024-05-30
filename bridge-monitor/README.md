@@ -29,3 +29,7 @@ The implementation is extremely simple and quick. It only requires downloading a
 The system is designed to update the metrics periodically and automatically using systemd services and timers. This ensures that up-to-date data is always available without continuous manual intervention.
 
 With these features, this project provides an efficient and effective solution for monitoring custom metrics of the bridge node, leveraging the capabilities of Prometheus and Node Exporter to enhance the monitoring and maintenance of your infrastructure.
+
+## Available Resources
+
+
