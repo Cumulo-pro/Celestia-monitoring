@@ -1,4 +1,4 @@
-# Bridge Monitor tool
+# Scraping of Bridge Node Metrics in Prometheus
 
 ## Introduction 
 
