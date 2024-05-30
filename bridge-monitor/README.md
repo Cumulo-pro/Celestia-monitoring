@@ -14,7 +14,7 @@ The implementation of these metrics does not require any modifications to the br
 
 ### Exclusive Use of Node Exporter
 
-No additional applications or services are needed apart from Node Exporter, which should already be implemented to monitor server resources. This simplifies the setup and reduces administrative overhead.
+No additional applications or services are needed apart from **Node Exporter**, which should already be implemented to monitor server resources. This simplifies the setup and reduces administrative overhead.
 
 ### No Impact on Server Resources
 
