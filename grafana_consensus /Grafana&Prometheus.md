@@ -188,7 +188,7 @@ The next step will ask you to change your password:
 
 After changing your password, log in to the Grafana website to download a dashboard in JSON format.
 You can search or download our Celestia Consensus metrics by Cumulo dashboard to continue this tutorial :-)
-[Grafana Consensus Metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/grafana_consensus_metrics.md)
+[Grafana Consensus Dashboard](https://grafana.com/grafana/dashboards/21116-celestia-consensus-validator-node/)
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/4874894b-a4d2-4090-a270-64aa6c3ca51b)
 
