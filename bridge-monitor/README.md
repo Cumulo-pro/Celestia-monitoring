@@ -32,4 +32,8 @@ With these features, this project provides an efficient and effective solution f
 
 ## Available Resources
 
+Grafana consensus & validator metrics
+
+This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
+
 
