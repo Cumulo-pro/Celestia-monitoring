@@ -1,5 +1,21 @@
 # Bridge Metrics
 
+1. [Bridge height](#bridge-height)
+2. [Node version](#node-version)
+3. [Time Started Bridge node](#time-started-bridge-node)
+4. [Node Chain-id](#node-chain-id)
+5. [Canonical Peer Status](#canonical-peer-status)
+6. [Consensus Height](#consensus-height)
+7. [SYNC STATUS](#sync-status)
+8. [Node Last Signed Height](#node-last-signed-height)
+9. [State Syncing](#state-syncing)
+10. [Num Timeout Connectivity](#num-timeout-connectivity)
+11. [Last Timeout Connectivity](#last-timeout-connectivity)
+12. [Num Failed to parse timestamp](#num-failed-to-parse-timestamp)
+13. [Last Failed to parse timestamp](#last-failed-to-parse-timestamp)
+14. [Num Connection closed by remote host](#num-connection-closed-by-remote-host)
+15. [Time Last Connection closed by remote host](#time-last-connection-closed-by-remote-host)
+16. [Cache life expectancy (in seconds)](#cache-life-expectancy-in-seconds)
 __________________________________________________________________________________
 
 ## Bridge height
