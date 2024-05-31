@@ -19,6 +19,8 @@ No additional applications or services are needed apart from **Node Exporter**, 
 ### No Impact on Server Resources
 
 The monitoring process does not alter the server resources dedicated to the bridge node. A simple script is used, which runs periodically via systemd and timers, ensuring that the server's performance is not affected.
+  - Memory: 4.8 MB is low and typical for scripts of this type.
+  - CPU: 1.202 seconds is an acceptable CPU usage for a periodic execution every 6 seconds.
 
 ### Simple and Quick Implementation
 
