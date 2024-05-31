@@ -3,3 +3,10 @@
 ## Introduction
 
 **Node Exporter** is a Prometheus tool that collects operating system and server hardware metrics. However, it can also be used to expose custom metrics.
+
+Prerequisites:
+- Install node_exporter on your server
+
+## Step 1: Prepare the environment
+
+Create a **metrics** directory to store metrics scripts.
