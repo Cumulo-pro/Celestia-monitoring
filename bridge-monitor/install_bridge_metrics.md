@@ -56,7 +56,7 @@ sudo chmod -R 755 /usr/local/metrics
 
 ## Step 3: Service and Timer Configuration
 
-Create a service file and timer to run the script periodically. For example, create **/etc/systemd/system/update_bridge_metrics.service** with the following content:
+Create a service file and timer to run the script periodically **/etc/systemd/system/update_bridge_metrics.service**:
 
 ```bash
 sudo tee /etc/systemd/system/update_bridge_metrics.service > /dev/null << EOF
@@ -81,5 +81,36 @@ sudo systemctl enable update_bridge_metrics.service
 sudo systemctl start update_bridge_metrics.service
 ```
 
+Create the timer **/etc/systemd/system/update_bridge_metrics.timer**:
 
+```bash
+sudo tee /etc/systemd/system/update_bridge_metrics.timer > /dev/null << EOF
+[Unit]
+Description=Temporizador para la actualización de métricas del puente
+
+[Timer]
+OnUnitActiveSec=6s
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+```
+
+Enable and start services:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now update_bridge_metrics.timer
+```
+
+## Step 4: Verification
+
+Check that the Node Exporter, update_bridge_metrics and the timer are working correctly:
+
+```bash
+sudo systemctl status node_exporter
+sudo systemctl status update_bridge_metrics.service
+sudo systemctl status update_bridge_metrics.timer
+```
 
