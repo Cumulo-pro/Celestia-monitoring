@@ -105,7 +105,7 @@ type_comment_chain_id="# TYPE chain_id_danode gauge"
 } > "$metrics_file"
 
 # Get the histogram
-histogram=$(sudo journalctl -u celestia-bridge.service | awk '/-- Histogram:/ {histogram=$0; next} {if (histogram) histogram = histogram ORS $0} /--/ {print histogram; exit}')
+histogram=$(sudo journalctl -u celestia-bridge.service | tac | awk '/--$/ {if (!found) {found=1} else {exit}}found {print}' | tac)
 
 # Extract necessary values from the histogram
 min=$(echo "$histogram" | awk '/Min value:/ {print $NF}')
