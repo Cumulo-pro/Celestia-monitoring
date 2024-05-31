@@ -25,7 +25,7 @@ type_comment="# TYPE bridge_height gauge"
     echo "$help_comment"
     echo "$type_comment"
     echo "bridge_height $height"
-} > "$metrics_file"
+} >> "$metrics_file"
 
 
 # The last version running on Celestia
@@ -92,7 +92,7 @@ fi
     echo "$help_comment_status"
     echo "$type_comment_status"
     echo "connection_status $connection_status_value"
-} > "$metrics_file"
+} >> "$metrics_file"
 
 # Obtain chain_id_danode status
 chain_id_danode=$(sudo journalctl -u celestia-bridge.service | grep "network:" | awk '{if ($NF == "mocha-4") print 0; else if ($NF == "celestia") print 1}' | tail -n 1)
@@ -104,7 +104,7 @@ type_comment_chain_id="# TYPE chain_id_danode gauge"
     echo "$help_comment_chain_id"
     echo "$type_comment_chain_id"
     echo "chain_id_danode $chain_id_danode"
-} > "$metrics_file"
+} >> "$metrics_file"
 
 # Time since last connection closed by remote host
 last_closed_remote_host=$(sudo journalctl -p err | awk '/Connection closed by remote host/ {date=$1 " " $2 " " $3} END {print date}')
