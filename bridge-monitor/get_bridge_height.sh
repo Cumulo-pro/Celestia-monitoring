@@ -16,10 +16,17 @@ function calculate_time_difference {
 > "$metrics_file"
 
 # Obtain bridge height
-height=$(journalctl -u celestia-bridge.service -q | awk '/INFO.*header\/store.*new head/ {height=$NF} END {print height}')
-echo "# HELP bridge_height Bridge node block height" >> "$metrics_file"
-echo "# TYPE bridge_height gauge" >> "$metrics_file"
-echo "bridge_height $height" >> "$metrics_file"
+height=$(journalctl -u celestia-bridge.service -q | grep 'INFO.*header/store.*new head' | tail -n 1 | awk -F 'height": ' '{print $2}' | awk -F ',' '{print $1}')
+# Define HELP and TYPE
+help_comment="# HELP bridge_height Bridge node block height "
+type_comment="# TYPE bridge_height gauge"
+# save
+{
+    echo "$help_comment"
+    echo "$type_comment"
+    echo "bridge_height $height"
+} > "$metrics_file"
+
 
 # The last version running on Celestia
 last_vers_danode=$(sudo journalctl -u celestia-bridge.service | awk '/node version:/ {last_version=$NF} END {gsub(/\./, "", last_version); print last_version/10}')
