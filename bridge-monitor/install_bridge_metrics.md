@@ -29,3 +29,8 @@ sudo chmod +x /usr/local/metrics/get_bridge_height.sh
 ```
 
 ## Step 2: Setting up the Node Exporter service
+
+```bash
+sudo sed -i 's|ExecStart=/usr/local/bin/node_exporter.*|ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory=/usr/local/metrics|' /etc/systemd/system/node_exporter.service
+```
+
