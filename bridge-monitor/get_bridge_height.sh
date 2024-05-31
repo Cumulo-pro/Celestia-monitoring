@@ -3,6 +3,11 @@
 # node_exporter metrics file path
 metrics_file="/usr/local/metrics/node_exporter_metrics.prom"
 
+# Create the file if it does not exist
+if [ ! -f "$metrics_file" ]; then
+    touch "$metrics_file"
+fi
+
 # Obtain bridge height
 height=$(journalctl -u celestia-bridge.service -q | grep 'INFO.*header/store.*new head' | tail -n 1 | awk -F 'height": ' '{print $2}' | awk -F ',' '{print $1}')
 # Define HELP and TYPE
