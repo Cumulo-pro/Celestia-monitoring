@@ -54,4 +54,7 @@ sudo chown -R node_exporter:node_exporter /usr/local/metrics
 sudo chmod -R 755 /usr/local/metrics
 ```
 
-## Step 3: Scheduling the metrics update
+## Step 3: Service and Timer Configuration
+
+Create a service file and timer to run the script periodically. For example, create **/etc/systemd/system/update_bridge_metrics.service** with the following content:
+
