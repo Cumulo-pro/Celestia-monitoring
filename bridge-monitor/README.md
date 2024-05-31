@@ -34,18 +34,18 @@ With these features, this project provides an efficient and effective solution f
 
 ## Available Resources
 
-[Install Bridge metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/install_bridge_metrics.md)
+- **[Install Bridge metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/install_bridge_metrics.md)**
 
-Implementation and Configuration of Custom Metrics Monitoring
+  Implementation and Configuration of Custom Metrics Monitoring
 
-[Grafana consensus & validator metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)
+- **[Grafana consensus & validator metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)**
 
-This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
+  This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
-[Grafana Dashboard JSON Configuration File](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/Celestia%20Bridge%20Node-1717086106232.json)
+- **[Grafana Dashboard JSON Configuration File](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/Celestia%20Bridge%20Node-1717086106232.json)**
 
-This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
+  This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
 
-[get_bridge_height.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/bridge-monitor/get_bridge_height.sh) 
+- **[get_bridge_height.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/bridge-monitor/get_bridge_height.sh)**
 
-Bash script designed to collect various metrics related to the celestia-bridge service and save this data in a metrics file in Prometheus format.
+  Bash script designed to collect various metrics related to the celestia-bridge service and save this data in a metrics file in Prometheus format.
