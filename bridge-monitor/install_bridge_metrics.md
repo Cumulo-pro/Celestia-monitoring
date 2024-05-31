@@ -33,5 +33,6 @@ sudo chmod +x /usr/local/metrics/get_bridge_height.sh
 ```bash
 sudo sed -i 's|ExecStart=/usr/local/bin/node_exporter.*|ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory=/usr/local/metrics|' /etc/systemd/system/node_exporter.service
 ```
-![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/bb9c80ff-0360-49f2-83b1-29c7d5145ad6)
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/efa26b98-62e5-4758-882f-2cbf85df7abf)
+
 
