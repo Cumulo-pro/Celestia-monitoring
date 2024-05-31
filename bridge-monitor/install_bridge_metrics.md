@@ -58,3 +58,28 @@ sudo chmod -R 755 /usr/local/metrics
 
 Create a service file and timer to run the script periodically. For example, create **/etc/systemd/system/update_bridge_metrics.service** with the following content:
 
+```bash
+sudo tee /etc/systemd/system/update_bridge_metrics.service > /dev/null << EOF
+[Unit]
+Description=Bridge metrics update
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/metrics/get_bridge_height.sh
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+Enable and start services:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable update_bridge_metrics.service
+sudo systemctl start update_bridge_metrics.service
+```
+
+
+
