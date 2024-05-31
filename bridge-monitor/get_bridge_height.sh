@@ -44,8 +44,6 @@ type_comment="# TYPE num_err_timeout_connectivity gauge"
     echo "num_err_timeout_connectivity $num_err_timeout_connectivity"
 } >> "$metrics_file"
 
-
-
 # Counting the number of closed connections per remote host
 num_closed_remote_host=$(sudo journalctl -p err | grep -c 'Connection closed by remote host')
 
@@ -218,7 +216,7 @@ type_comment="# TYPE time_last_err_timeout_connectivity gauge"
 } > "$metrics_file"
 
 # Time in seconds of of the last timestamp analysis error in numeric format
-closed_remote_host_date=$(sudo journalctl -p err | grep 'Connection closed by remote host' | tail -n 1 | awk '{print $1, $2, $3}')
+closed_remote_host_date=$(sudo journalctl -p err | grep 'Failed to parse timestamp' | tail -n 1 | awk '{print $1, $2, $3}')
 
 closed_remote_host_timestamp=$(date -d "$closed_remote_host_date" +%s)
 now=$(date +%s)
