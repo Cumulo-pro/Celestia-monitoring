@@ -10,3 +10,8 @@ Prerequisites:
 ## Step 1: Prepare the environment
 
 Create a **metrics** directory to store metrics scripts.
+
+```bash
+cd /usr/local/
+sudo mkdir metrics
+```
