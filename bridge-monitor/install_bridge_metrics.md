@@ -114,3 +114,9 @@ sudo systemctl status update_bridge_metrics.service
 sudo systemctl status update_bridge_metrics.timer
 ```
 
+Verify that the metrics are being collected correctly by accessing the Node Exporter URL:
+
+```bash
+curl http://localhost:9100/metrics | grep bridge_height
+```
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/f7f08b13-12f1-4dc1-af9a-3398ad20bb03)
