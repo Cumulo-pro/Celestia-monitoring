@@ -139,13 +139,20 @@ echo "# HELP last_failed_parse_timestamp Time since last connection closed by re
 echo "# TYPE last_failed_parse_timestamp gauge" >> "$metrics_file"
 echo "last_failed_parse_timestamp $time_last_failed_parse_timestamp" >> "$metrics_file"
 
-# Time since Celestia DA node started
-date_started_danode=$(sudo journalctl -u celestia-bridge.service | awk '/Started celestia DA node/ {date=$1 " " $2 " " $3} END {print date}')
-if [ -n "$date_started_danode" ]; then
-    time_since_celestia_danode_started=$(calculate_time_difference $date_started_danode)
-else
-    time_since_celestia_danode_started=0
-fi
-echo "# HELP time_since_celestia_danode_started Time since Celestia DA node started" >> "$metrics_file"
-echo "# TYPE time_since_celestia_danode_started gauge" >> "$metrics_file"
-echo "time_since_celestia_danode_started $time_since_celestia_danode_started" >> "$metrics_file"
+# Time when celestia DA node started
+date_started_danode=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
+
+
+now=$(date +%s)
+difference=$((now - date_started_danode))
+
+# HELP & TYPE
+help_comment="# HELP time_since_celestia_danode_started Time since Celestia DA node started"
+type_comment="# TYPE time_since_celestia_danode_started gauge"
+
+# Save
+{
+    echo "$help_comment"
+    echo "$type_comment"
+    echo "time_since_celestia_danode_started $difference"
+} >> "$metrics_file"
