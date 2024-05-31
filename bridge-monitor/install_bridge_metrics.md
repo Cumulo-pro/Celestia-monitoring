@@ -120,3 +120,9 @@ Verify that the metrics are being collected correctly by accessing the Node Expo
 curl http://localhost:9100/metrics | grep bridge_height
 ```
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/f7f08b13-12f1-4dc1-af9a-3398ad20bb03)
+
+_______________________________________
+
+That's all, now install Dashboar on your Grafana to be able to visualise the metrics.
+
+- **[Grafana Dashboard JSON Configuration File](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/Celestia%20Bridge%20Node.json)**
