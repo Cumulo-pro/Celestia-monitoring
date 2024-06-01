@@ -106,6 +106,25 @@ type_comment_chain_id="# TYPE chain_id_danode gauge"
     echo "chain_id_danode $chain_id_danode"
 } >> "$metrics_file"
 
+# Time when celestia DA node started
+date_started_danode=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
+
+
+now=$(date +%s)
+difference=$((now - date_started_danode))
+
+# HELP & TYPE
+help_comment="# HELP time_since_celestia_danode_started Time since Celestia DA node started"
+type_comment="# TYPE time_since_celestia_danode_started gauge"
+
+# Save
+{
+    echo "$help_comment"
+    echo "$type_comment"
+    echo "time_since_celestia_danode_started $difference"
+} > "$metrics_file"
+
+
 # Time since last connection closed by remote host
 last_closed_remote_host=$(sudo journalctl -p err | awk '/Connection closed by remote host/ {date=$1 " " $2 " " $3} END {print date}')
 if [ -n "$last_closed_remote_host" ]; then
