@@ -142,17 +142,35 @@ echo "last_failed_parse_timestamp $time_last_failed_parse_timestamp" >> "$metric
 # Time when celestia DA node started
 date_started_danode=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
 
-
+# Get current timestamp
 now=$(date +%s)
-difference=$((now - date_started_danode))
+
+# Calculate difference if date_started_danode is not empty
+if [ -n "$date_started_danode" ]; then
+    difference=$((now - date_started_danode))
+fi
 
 # HELP & TYPE
 help_comment="# HELP time_since_celestia_danode_started Time since Celestia DA node started"
 type_comment="# TYPE time_since_celestia_danode_started gauge"
 
-# Save
-{
-    echo "$help_comment"
-    echo "$type_comment"
-    echo "time_since_celestia_danode_started $difference"
-} >> "$metrics_file"
+# Read previous value of time_since_celestia_danode_started
+previous_value=$(grep "^time_since_celestia_danode_started " "$metrics_file" | awk '{print $2}')
+
+# Save only if date_started_danode is not empty
+if [ -n "$date_started_danode" ]; then
+    {
+        echo "$help_comment"
+        echo "$type_comment"
+        echo "time_since_celestia_danode_started $difference"
+    } > "$metrics_file"
+else
+    # If date_started_danode is empty, write the previous value back
+    if [ -n "$previous_value" ]; then
+        {
+            echo "$help_comment"
+            echo "$type_comment"
+            echo "time_since_celestia_danode_started $previous_value"
+        } > "$metrics_file"
+    fi
+fi
