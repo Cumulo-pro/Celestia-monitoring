@@ -1,5 +1,4 @@
-# Blobstream Orchestrator Monitor
-![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/fcbe9746-47a6-4975-a80f-6f7bc4d5c886)
+![Portada-04](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/6b269784-bd56-4c0b-866c-df02a3ee6e98)
 
 ## Introduction
 Blobstream is a data availability solution designed for Ethereum that scales securely with the number of users. Formerly known as the Quantum Gravity Bridge (QGB), Blobstream relays commitments to Celestia's data root to an on-chain light client on Ethereum, enabling developers to integrate it into Layer 2 (L2) contracts. 
@@ -36,6 +35,7 @@ This JSON structure encapsulates critical details such as the nonce, begin and e
 You can see an example here:
 [blobstream in Celestia Front-Chain](https://celestia.frontchain.cumulo.pro/blobstream.php)
 
+![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/fcbe9746-47a6-4975-a80f-6f7bc4d5c886)
 
 ### Services
 [monitor_orchestrator.service](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/blobstream-monitor/services/monitor_orchestrator.service) A systemd service that executes the monitor_orchestrator_json.sh script. This service ensures that the Orchestrator monitoring is performed regularly and automatically.
