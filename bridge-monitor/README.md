@@ -38,7 +38,7 @@ With these features, this project provides an efficient and effective solution f
 
   Implementation and Configuration of Custom Metrics Monitoring
 
-- **[Consensus & validator metrics FAQ](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)**
+- **[Bridge metrics FAQ](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)**
 
   This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
