@@ -46,6 +46,8 @@ With these features, this project provides an efficient and effective solution f
 
   This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
 
+- **[Grafana Dashboard: Celestia Bridge Node](https://grafana.com/grafana/dashboards/21178-celestia-bridge-node-v2/) 
+
 - **[get_bridge_height.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/bridge-monitor/get_bridge_height.sh)**
 
   Bash script designed to collect various metrics related to the celestia-bridge service and save this data in a metrics file in Prometheus format.
