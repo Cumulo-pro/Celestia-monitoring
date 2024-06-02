@@ -38,7 +38,7 @@ With these features, this project provides an efficient and effective solution f
 
   Implementation and Configuration of Custom Metrics Monitoring
 
-- **[Grafana consensus & validator metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)**
+- **[Consensus & validator metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge_metrics.md)**
 
   This document details the specific metrics available in Grafana for Celestia's Bridge nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
@@ -46,7 +46,9 @@ With these features, this project provides an efficient and effective solution f
 
   This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
 
-- **[Grafana Dashboard: Celestia Bridge Node](https://grafana.com/grafana/dashboards/21178-celestia-bridge-node-v2/) 
+- **[Grafana Dashboard: Celestia Bridge Node]**(https://grafana.com/grafana/dashboards/21178-celestia-bridge-node-v2/)
+
+  System for monitoring custom metrics for a bridge node using Prometheus and Node Exporter. Node Exporter is a powerful tool that collects operating system and hardware metrics from servers and can also be extended to expose custom metrics.
 
 - **[get_bridge_height.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/bridge-monitor/get_bridge_height.sh)**
 
