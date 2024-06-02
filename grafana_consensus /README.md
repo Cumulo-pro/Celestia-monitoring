@@ -1,6 +1,6 @@
 ![Portada-02](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/be6bccbd-35b6-4f08-94b6-339e21574561)
 
-In this section of the Celestia-monitoring project, we focus on monitoring and analyzing metrics related to the consensus and validator nodes of the Celestia blockchain. We provide detailed guides and resources necessary to set up and use tools like Prometheus and Grafana to monitor the performance and status of the nodes.
+This section of the Celestia-monitoring project is dedicated to tracking and analyzing metrics for the Celestia blockchain's consensus and validator nodes. It provides comprehensive guides and resources for setting up and using tools like Prometheus and Grafana to effectively monitor the performance and status of these nodes.
 
 ![image](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/8fdbedcb-0bb0-41ba-95b6-a440462778b4)
 
