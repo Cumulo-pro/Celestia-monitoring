@@ -4,8 +4,6 @@
 
 System for monitoring custom metrics for a bridge node using Prometheus and Node Exporter. Node Exporter is a powerful tool that collects operating system and hardware metrics from servers and can also be extended to expose custom metrics. Through this project, you will learn how to configure Node Exporter to collect and expose specific metrics from the bridge node, and how to automate this process using scripts and systemd services. This approach will provide you with detailed insights into the performance and status of the bridge node, facilitating efficient monitoring and maintenance of the system.
 
-![bridge1](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/78eee11f-648c-4447-851e-e2c8d92a667b)
-
 ## Features
 
 ### Non-Intrusive Method
@@ -31,6 +29,8 @@ The implementation is extremely simple and quick. It only requires downloading a
 The system is designed to update the metrics periodically and automatically using systemd services and timers. This ensures that up-to-date data is always available without continuous manual intervention.
 
 With these features, this project provides an efficient and effective solution for monitoring custom metrics of the bridge node, leveraging the capabilities of Prometheus and Node Exporter to enhance the monitoring and maintenance of your infrastructure.
+
+![bridge1](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/78eee11f-648c-4447-851e-e2c8d92a667b)
 
 ## Available Resources
 
