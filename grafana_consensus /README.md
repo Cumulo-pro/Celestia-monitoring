@@ -12,7 +12,7 @@ This section of the Celestia-monitoring project is dedicated to tracking and ana
 
    This document details the specific metrics available in Grafana for Celestia's consensus and validator nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
-- **[Celestia Consensus & Validator Node](https://grafana.com/grafana/dashboards/21116-celestia-consensus-validator-node/)**
+- **[Grafana Dashboard: Celestia Consensus & Validator Node](https://grafana.com/grafana/dashboards/21116-celestia-consensus-validator-node/)**
 
    This Grafana dashboard provides a comprehensive and detailed view of the state and activity of nodes within the Celestia consensus system, allowing network administrators and developers to monitor various critical aspects of the infrastructure in real time. 
 
