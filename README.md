@@ -1,5 +1,3 @@
-# Celestia Monitoring System
-  by Cumulo
 ![Portada-01](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/d2ae76f1-7d33-429b-be4e-59f1b5c763f4)
 
 
