@@ -1,4 +1,4 @@
-# Grafana consensus & validator metrics 
+# Grafana consensus & validator metrics FAQ
 
 - [Sync Status](#sync-status)
 - [State Syncing](#state-syncing)
