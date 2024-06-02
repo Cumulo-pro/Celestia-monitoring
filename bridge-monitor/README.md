@@ -1,4 +1,4 @@
-# Scraping of Bridge Node Metrics in Prometheus
+![Portada-03](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/e673b4a6-28ec-4488-9299-7ba238306145)
 
 ## Introduction 
 
