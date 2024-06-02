@@ -8,7 +8,7 @@ This section of the Celestia-monitoring project is dedicated to tracking and ana
 
    This is a step-by-step tutorial on how to set up monitoring for a consensus node and validator for the Celestia blockchain using Prometheus and Grafana. The document covers everything from initial installation steps to final adjustments to have a fully functional monitoring system.
 
-- **[Grafana consensus & validator metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/grafana_consensus_metrics.md)**
+- **[Grafana consensus & validator metrics FAQ](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/grafana_consensus_metrics.md)**
 
    This document details the specific metrics available in Grafana for Celestia's consensus and validator nodes. It includes descriptions and explanations of various key metrics, such as sync status, validator voting power, mempool size, and more.
 
