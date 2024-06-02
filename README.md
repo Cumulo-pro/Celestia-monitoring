@@ -9,3 +9,7 @@ The "Celestia-monitoring" repository provides tools and guides for monitoring an
  - Metrics Documentation: Details on key metrics available in Grafana.
  - Custom Metrics: Tutorials for setting up Node Exporter to collect bridge node metrics.
  - Blobstream Monitoring: Tools for monitoring Blobstream Orchestrator service, including error detection and alerts via Telegram.
+
+- [Consensus & Validator Node Metrics](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/grafana_consensus%20/README.md)
+- [Scraping of Bridge Node Metrics in Prometheus](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/README.md)
+- [Blobstream Orchestrator Monitor](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/blobstream-monitor/Readme.md)
