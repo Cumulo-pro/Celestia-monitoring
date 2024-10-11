@@ -25,4 +25,15 @@ Celestia's bridge node start date:
 sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}'
 ```
 
+Number of network connectivity timeout errors:  
+```bash
+sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l
+```
+
+Number of connections closed by the remote host:  
+```bash
+sudo journalctl -p err | grep -c 'Connection closed by remote host'
+```
+
+
 
