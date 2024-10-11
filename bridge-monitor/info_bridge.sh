@@ -26,9 +26,16 @@ hash_current_height=$(sudo journalctl -u celestia-bridge.service | grep 'new hea
     echo "bridge_height_hash_info{hash=\"$hash_current_height\"} 1"
 } >> "$metrics_file"
 
-# Obtener la versión del nodo (Latest Node Version)
+# Intentar obtener la versión del nodo (Latest Node Version) desde el Bridge
 latest_node_version=$(sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1 | awk -F'node version: *' '{print $2}')
-# Definir HELP y TYPE para la versión del nodo como tipo "info"
+
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$latest_node_version" ]; then
+    # Extraer el valor del archivo JSON
+    latest_node_version=$(jq -r '.latest_node_version' "$json_file")
+fi
+
+# Definir HELP y TYPE para la versión del nodo como tipo "info" en Prometheus
 {
     echo "# HELP latest_node_version The latest running version of the Celestia node"
     echo "# TYPE latest_node_version gauge"
@@ -39,7 +46,7 @@ latest_node_version=$(sudo journalctl -u celestia-bridge.service | grep "node ve
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
 
-# Definir HELP y TYPE para el bloque actual del RPC
+# Definir HELP y TYPE para el bloque actual del RPC en Prometheus
 {
     echo "# HELP current_block_rpc Current block height from RPC"
     echo "# TYPE current_block_rpc gauge"
