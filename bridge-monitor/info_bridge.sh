@@ -42,6 +42,16 @@ fi
     echo "latest_node_version_info{version=\"$latest_node_version\"} 1"
 } >> "$metrics_file"
 
+# Obtener el chain_id del nodo (0 es mocha-4, 1 es celestia)
+node_chain_id=$(sudo journalctl -u celestia-bridge.service | grep "network:" | awk '{if ($NF == "mocha-4") print 0; else if ($NF == "celestia") print 1}' | tail -n 1)
+
+# Definir HELP y TYPE para el chain_id en Prometheus
+{
+    echo "# HELP node_chain_id Current chain ID of the Celestia bridge node (0 for mocha-4, 1 for celestia)"
+    echo "# TYPE node_chain_id gauge"
+    echo "node_chain_id $node_chain_id"
+} >> "$metrics_file"
+
 # Obtener la altura actual del bloque desde el RPC de Celestia
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
@@ -59,6 +69,7 @@ cat <<EOF > "$json_file"
     "bridge_height": "$height",
     "bridge_height_hash": "$hash_current_height",
     "latest_node_version": "$latest_node_version",
-    "current_block_rpc": "$current_block_rpc"
+    "current_block_rpc": "$current_block_rpc",
+    "node_chain_id": "$node_chain_id"
 }
 EOF
