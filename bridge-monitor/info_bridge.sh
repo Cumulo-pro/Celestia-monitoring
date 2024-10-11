@@ -2,6 +2,8 @@
 
 # Ruta al archivo de métricas de node_exporter
 metrics_file="/usr/local/metrics/node_exporter_metrics.prom"
+# Ruta al archivo JSON
+json_file="/home/bridge_metrics.json"
 
 # Limpiar archivo de métricas
 > "$metrics_file"
@@ -43,3 +45,13 @@ current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json"
     echo "# TYPE current_block_rpc gauge"
     echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
+
+# Guardar los valores en un archivo JSON
+cat <<EOF > "$json_file"
+{
+    "bridge_height": "$height",
+    "bridge_height_hash": "$hash_current_height",
+    "latest_node_version": "$latest_node_version",
+    "current_block_rpc": "$current_block_rpc"
+}
+EOF
