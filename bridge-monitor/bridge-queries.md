@@ -5,9 +5,9 @@ height of the block:
 journalctl -u celestia-bridge.service -q | grep 'INFO.*header/store.*new head' | tail -n 1 | awk -F 'height": ' '{print $2}' | awk -F ',' '{print $1}'
 ```
 
-latest DA node version:  
+latest bridge node version:  
 ```bash
-sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1 | awk '{print substr($NF, 2)}' | tr -d '.' | awk '{print $1 / 10}'
+sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1
 ```
 
 connection status:  
