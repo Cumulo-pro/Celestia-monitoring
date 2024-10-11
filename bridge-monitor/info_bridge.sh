@@ -63,6 +63,16 @@ current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json"
     echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
+# Obtener la fecha de inicio del nodo de Celestia (en formato Unix)
+start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
+
+# Definir HELP y TYPE para la fecha de inicio del nodo
+{
+    echo "# HELP celestia_node_start_date The start date of the Celestia bridge node (in Unix timestamp)"
+    echo "# TYPE celestia_node_start_date gauge"
+    echo "celestia_node_start_date $start_date"
+} >> "$metrics_file"
+
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
 {
@@ -70,6 +80,7 @@ cat <<EOF > "$json_file"
     "bridge_height_hash": "$hash_current_height",
     "latest_node_version": "$latest_node_version",
     "current_block_rpc": "$current_block_rpc",
-    "node_chain_id": "$node_chain_id"
+    "node_chain_id": "$node_chain_id",
+    "celestia_node_start_date": "$start_date"
 }
 EOF
