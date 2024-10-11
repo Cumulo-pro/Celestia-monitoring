@@ -40,4 +40,15 @@ Last network connectivity timeout error date:
 sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}'
 ```
 
+Full Peer Count:  
+```bash
+sudo journalctl -u celestia-bridge.service | grep "full" | tail -n 1
+```
+
+Archival Peer Count:  
+```bash
+sudo journalctl -u celestia-bridge.service | grep "archival" | tail -n 1
+```
+
+
 
