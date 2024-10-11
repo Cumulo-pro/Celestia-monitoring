@@ -12,7 +12,7 @@ sudo journalctl -u celestia-bridge.service | grep 'new head' | tail -n 1 | awk -
 
 Latest Node Version:  
 ```bash
-sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1
+sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1 | awk -F'node version: *' '{print $2}'
 ```
 
 peers status (CANONICAL_PEER_STATUS):  
