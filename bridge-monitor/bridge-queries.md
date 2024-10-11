@@ -35,5 +35,9 @@ Number of connections closed by the remote host:
 sudo journalctl -p err | grep -c 'Connection closed by remote host'
 ```
 
+Last network connectivity timeout error date:  
+```bash
+sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}'
+```
 
 
