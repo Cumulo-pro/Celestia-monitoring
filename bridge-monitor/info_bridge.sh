@@ -25,14 +25,23 @@ sudo bash -c "{
 
 # Obtener la ID del nodo (Node ID) y depurar el resultado
 node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ 2>&1 | jq -r '.result.id')
-echo "DEBUG: Node ID is $node_id"  # Línea de depuración para verificar el valor
 
+# Verificar si el comando celestia devuelve un error
+if [ $? -ne 0 ]; then
+    echo "ERROR: Failed to get Node ID from celestia command."
+    node_id="null"
+else
+    echo "DEBUG: Node ID from celestia is $node_id"
+fi
+
+# Si la ID del nodo es vacía o "null", intentar obtenerla desde el JSON
 if [ -z "$node_id" ] || [ "$node_id" = "null" ]; then
     echo "DEBUG: Node ID is empty or null, reading from JSON"
     node_id=$(jq -r '.node_id' "$json_file")
     echo "DEBUG: Node ID from JSON is $node_id"
 fi
 
+# Escribir en el archivo de métricas temporal
 sudo bash -c "{
     echo '# HELP node_id_info Node ID of the Celestia bridge node'
     echo '# TYPE node_id_info gauge'
