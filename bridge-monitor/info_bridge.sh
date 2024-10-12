@@ -123,6 +123,24 @@ sudo bash -c "{
     echo 'connections_closed $connections_closed'
 } >> $temp_metrics_file"
 
+# Obtener el conteo de peers completos (Full Peer Count)
+full_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "full" | wc -l)
+
+sudo bash -c "{
+    echo '# HELP full_peer_count Number of full peers connected'
+    echo '# TYPE full_peer_count gauge'
+    echo 'full_peer_count $full_peer_count'
+} >> $temp_metrics_file"
+
+# Obtener el conteo de peers archivales (Archival Peer Count)
+archival_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "archival" | wc -l)
+
+sudo bash -c "{
+    echo '# HELP archival_peer_count Number of archival peers connected'
+    echo '# TYPE archival_peer_count gauge'
+    echo 'archival_peer_count $archival_peer_count'
+} >> $temp_metrics_file"
+
 # Mover el archivo temporal al archivo final
 sudo mv $temp_metrics_file $metrics_file
 
@@ -138,6 +156,8 @@ sudo bash -c "cat <<EOF > $json_file
     \"bridge_start_date\": \"$bridge_start_date\",
     \"timeout_errors\": \"$timeout_errors\",
     \"connections_closed\": \"$connections_closed\",
-    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\"
+    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\",
+    \"full_peer_count\": \"$full_peer_count\",
+    \"archival_peer_count\": \"$archival_peer_count\"
 }
 EOF"
