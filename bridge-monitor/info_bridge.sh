@@ -23,11 +23,16 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
-# Obtener la ID del nodo (Node ID)
+# Obtener la ID del nodo (Node ID) y depurar el resultado
 node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ 2>&1 | jq -r '.result.id')
+echo "DEBUG: Node ID is $node_id"  # Línea de depuración para verificar el valor
+
 if [ -z "$node_id" ] || [ "$node_id" = "null" ]; then
+    echo "DEBUG: Node ID is empty or null, falling back to JSON"
     node_id=$(jq -r '.node_id' "$json_file")
 fi
+
+echo "DEBUG: Final Node ID is $node_id"  # Verificar si el valor se obtiene correctamente
 
 sudo bash -c "{
     echo '# HELP node_id Celestia node ID'
