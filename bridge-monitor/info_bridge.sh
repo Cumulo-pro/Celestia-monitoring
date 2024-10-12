@@ -36,7 +36,7 @@ fi
 # Obtener la altura actual del bloque desde el RPC de Celestia
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
-if [ -z "$current_block_rpc" ];then
+if [ -z "$current_block_rpc" ]; then
     current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
 fi
 
@@ -48,7 +48,7 @@ fi
 
 # Intentar obtener la versión del nodo (Latest Node Version) desde el Bridge
 latest_node_version=$(sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1 | awk -F'node version: *' '{print $2}')
-if [ -z "$latest_node_version" ];then
+if [ -z "$latest_node_version" ]; then
     latest_node_version=$(jq -r '.latest_node_version' "$json_file")
 fi
 
@@ -60,7 +60,7 @@ fi
 
 # Obtener el chain_id del nodo (0 es mocha-4, 1 es celestia)
 node_chain_id=$(sudo journalctl -u celestia-bridge.service | grep "network:" | awk '{if ($NF == "mocha-4") print 0; else if ($NF == "celestia") print 1}' | tail -n 1)
-if [ -z "$node_chain_id" ];then
+if [ -z "$node_chain_id" ]; then
     node_chain_id=$(jq -r '.node_chain_id' "$json_file")
 fi
 
@@ -74,7 +74,7 @@ fi
 connection_status=$(sudo journalctl -u celestia-bridge.service | grep "CANONICAL_PEER_STATUS:" | awk -F'connection_status="' '{print $2}' | cut -d'"' -f1 | tail -n 1)
 
 # Convertir el estado a 1 si es "established", de lo contrario 0
-if [ "$connection_status" = "established" ];then
+if [ "$connection_status" = "established" ]; then
     connection_status_value=1
 else
     connection_status_value=0
@@ -88,7 +88,7 @@ fi
 
 # Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
 bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{print $1 " " $2 " " $3}' | xargs -I {} date -d "{}" +%s)
-if [ -z "$bridge_start_date" ];then
+if [ -z "$bridge_start_date" ]; then
     bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
 fi
 
