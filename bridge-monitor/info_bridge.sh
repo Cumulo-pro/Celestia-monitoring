@@ -23,6 +23,18 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
+# Obtener el Node ID del nodo Celestia
+node_id=$(celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ | jq -r '.result.id')
+if [ -z "$node_id" ]; then
+    node_id=$(jq -r '.node_id' "$json_file")
+fi
+
+sudo bash -c "{
+    echo '# HELP node_id Celestia node ID'
+    echo '# TYPE node_id gauge'
+    echo 'node_id_info{id=\"$node_id\"} 1'
+} >> $temp_metrics_file"
+
 # Obtener el hash de la altura actual (Hash Current Height)
 hash_current_height=$(sudo journalctl -u celestia-bridge.service | grep 'new head' | tail -n 1 | awk -F 'hash": "' '{print $2}' | awk -F '"' '{print $1}')
 if [ -z "$hash_current_height" ];then
@@ -125,6 +137,7 @@ sudo mv $temp_metrics_file $metrics_file
 sudo bash -c "cat <<EOF > $json_file
 {
     \"bridge_height\": \"$height\",
+    \"node_id\": \"$node_id\",
     \"bridge_height_hash\": \"$hash_current_height\",
     \"latest_node_version\": \"$latest_node_version\",
     \"current_block_rpc\": \"$current_block_rpc\",
