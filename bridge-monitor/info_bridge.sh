@@ -23,15 +23,26 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
-# Obtener la ID del nodo (Node ID) usando la ruta de almacenamiento con sudo
-# Ejecutar celestia p2p info utilizando la ruta del nodo
-node_id=$(sudo -u $(whoami) /usr/local/bin/celestia p2p info --node.store "$node_store_path" 2>&1)
+#!/bin/bash
+
+# Usar el directorio HOME del usuario que ejecuta el script
+USER_HOME=$(eval echo ~${SUDO_USER})
+
+# Comando para obtener el Node ID usando el store especificado
+NODE_ID=$(celestia p2p info --node.store $USER_HOME/.celestia-bridge-mocha-4/ | jq -r '.result.id')
+
+# Comprobar si se ha obtenido un Node ID válido
+if [ -z "$NODE_ID" ] || [ "$NODE_ID" == "null" ]; then
+    echo "Error: No se pudo obtener el Node ID."
+else
+    echo "Node ID: $NODE_ID"
+fi
 
 # Escribir en el archivo de métricas temporal
 sudo bash -c "{
     echo '# HELP node_id_info Node ID of the Celestia bridge node'
     echo '# TYPE node_id_info gauge'
-    echo 'node_id_info{id=\"$node_id\"} 1'
+    echo 'node_id_info{id=\"$NODE_ID\"} 1'
 } >> $temp_metrics_file"
 
 # Obtener el hash de la altura actual (Hash Current Height)
