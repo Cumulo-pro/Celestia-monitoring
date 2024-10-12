@@ -10,6 +10,12 @@ json_file="/home/bridge_metrics.json"
 
 # Obtener la altura actual (Current Height)
 height=$(journalctl -u celestia-bridge.service -q | grep 'INFO.*header/store.*new head' | tail -n 1 | awk -F 'height": ' '{print $2}' | awk -F ',' '{print $1}')
+
+# Si no se obtiene la altura, leerla del archivo JSON
+if [ -z "$height" ]; then
+    height=$(jq -r '.bridge_height' "$json_file")
+fi
+
 # Definir HELP y TYPE para Prometheus
 {
     echo "# HELP bridge_height Bridge node block height"
@@ -19,6 +25,12 @@ height=$(journalctl -u celestia-bridge.service -q | grep 'INFO.*header/store.*ne
 
 # Obtener el hash de la altura actual (Hash Current Height)
 hash_current_height=$(sudo journalctl -u celestia-bridge.service | grep 'new head' | tail -n 1 | awk -F 'hash": "' '{print $2}' | awk -F '"' '{print $1}')
+
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$hash_current_height" ]; then
+    hash_current_height=$(jq -r '.bridge_height_hash' "$json_file")
+fi
+
 # Definir HELP y TYPE para el hash como un tipo "info" en Prometheus
 {
     echo "# HELP bridge_height_hash Hash of current block height"
@@ -31,7 +43,6 @@ latest_node_version=$(sudo journalctl -u celestia-bridge.service | grep "node ve
 
 # Si no se obtiene el valor, leerlo del archivo JSON
 if [ -z "$latest_node_version" ]; then
-    # Extraer el valor del archivo JSON
     latest_node_version=$(jq -r '.latest_node_version' "$json_file")
 fi
 
@@ -45,6 +56,11 @@ fi
 # Obtener el chain_id del nodo (0 es mocha-4, 1 es celestia)
 node_chain_id=$(sudo journalctl -u celestia-bridge.service | grep "network:" | awk '{if ($NF == "mocha-4") print 0; else if ($NF == "celestia") print 1}' | tail -n 1)
 
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$node_chain_id" ]; then
+    node_chain_id=$(jq -r '.node_chain_id' "$json_file")
+fi
+
 # Definir HELP y TYPE para el chain_id en Prometheus
 {
     echo "# HELP node_chain_id Current chain ID of the Celestia bridge node (0 for mocha-4, 1 for celestia)"
@@ -55,6 +71,11 @@ node_chain_id=$(sudo journalctl -u celestia-bridge.service | grep "network:" | a
 # Obtener la altura actual del bloque desde el RPC de Celestia
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
+
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$current_block_rpc" ]; then
+    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
+fi
 
 # Definir HELP y TYPE para el bloque actual del RPC en Prometheus
 {
