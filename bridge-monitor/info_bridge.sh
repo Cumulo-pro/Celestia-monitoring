@@ -24,7 +24,7 @@ sudo bash -c "{
 } >> $temp_metrics_file"
 
 # Obtener la ID del nodo (Node ID) y depurar el resultado
-node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ 2>&1)
+node_id=$(sudo /usr/local/bin/celestia p2p info --node.store /home/arixcum6XL-2/.celestia-bridge-mocha-4/ 2>&1)
 
 # Depuración del resultado bruto
 echo "DEBUG: Raw output from celestia command: $node_id"
@@ -41,6 +41,14 @@ else
     echo "DEBUG: Node ID from celestia is $node_id_parsed"
     node_id="$node_id_parsed"
 fi
+
+# Escribir en el archivo de métricas temporal
+sudo bash -c "{
+    echo '# HELP node_id_info Node ID of the Celestia bridge node'
+    echo '# TYPE node_id_info gauge'
+    echo 'node_id_info{id=\"$node_id\"} 1'
+} >> $temp_metrics_file"
+
 
 # Escribir en el archivo de métricas temporal
 sudo bash -c "{
