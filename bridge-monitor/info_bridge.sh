@@ -57,6 +57,20 @@ fi
     echo "node_chain_id $node_chain_id"
 } >> "$metrics_file"
 
+# Obtener el estado de la conexión (Connection Status)
+connection_status=$(sudo journalctl -u celestia-bridge.service | grep "CANONICAL_PEER_STATUS:" | awk -F'connection_status="' '{print $2}' | cut -d'"' -f1 | tail -n 1)
+
+# Convertir el estado a 1 si es "established", de lo contrario 0
+if [ "$connection_status" = "established" ]; then
+    connection_status_value=1
+else
+    connection_status_value=0
+fi
+
+    echo "# HELP connection_status Status of the connection (1 for established, 0 otherwise)" >> "$metrics_file"
+    echo "# TYPE connection_status gauge" >> "$metrics_file"
+    echo "connection_status $connection_status_value" >> "$metrics_file"
+
 # Obtener la altura actual del bloque desde el RPC de Celestia
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
@@ -70,22 +84,6 @@ fi
     echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
-# Obtener el estado de la conexión (Connection Status)
-connection_status=$(sudo journalctl -u celestia-bridge.service | grep "CANONICAL_PEER_STATUS:" | awk -F'connection_status="' '{print $2}' | cut -d'"' -f1 | tail -n 1)
-
-# Convertir el estado a 1 si es "established", de lo contrario 0
-if [ "$connection_status" = "established" ]; then
-    connection_status_value=1
-else
-    connection_status_value=0
-fi
-
-# Comprobar si el valor de connection_status_value se calcula correctamente
-echo "Connection status value: $connection_status_value"
-
-    echo "# HELP connection_status Status of the connection (1 for established, 0 otherwise)" >> "$metrics_file"
-    echo "# TYPE connection_status gauge" >> "$metrics_file"
-    echo "connection_status $connection_status_value" >> "$metrics_file"
     
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
