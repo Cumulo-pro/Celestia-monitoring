@@ -133,13 +133,14 @@ sudo bash -c "{
 } >> $temp_metrics_file"
 
 # Obtener el conteo de peers archivales (Archival Peer Count)
-archival_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "archival" | wc -l)
+archival_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "archival" | tail -n 1 | awk -F'"amount": ' '{print $2}' | awk -F'}' '{print $1}')
 
 sudo bash -c "{
     echo '# HELP archival_peer_count Number of archival peers connected'
     echo '# TYPE archival_peer_count gauge'
     echo 'archival_peer_count $archival_peer_count'
 } >> $temp_metrics_file"
+
 
 # Mover el archivo temporal al archivo final
 sudo mv $temp_metrics_file $metrics_file
