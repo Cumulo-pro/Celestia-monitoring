@@ -188,6 +188,8 @@ sudo bash -c "cat <<EOF > $json_file
     \"connections_closed\": \"$connections_closed\",
     \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\",
     \"full_peer_count\": \"$full_peer_count\",
-    \"archival_peer_count\": \"$archival_peer_count\"
+    \"archival_peer_count\": \"$archival_peer_count\",
+     \"wantlist_size\": \"$wantlist_size\",
+    \"overflow_size\": \"$overflow_size\"
 }
 EOF"
