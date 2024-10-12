@@ -79,24 +79,19 @@ if [ -z "$bridge_start_date" ]; then
     bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
 fi
 
+# Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
+bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{print $1 " " $2 " " $3}' | xargs -I {} date -d "{}" +%s)
+
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$bridge_start_date" ]; then
+    bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
+fi
+
 # Definir HELP y TYPE para la fecha de inicio del nodo en Prometheus
 {
     echo "# HELP bridge_start_date Timestamp of when Celestia DA node started"
     echo "# TYPE bridge_start_date gauge"
     echo "bridge_start_date $bridge_start_date"
-} >> "$metrics_file"
-
-# Obtener la altura actual del bloque desde el RPC de Celestia
-rpc_url="https://mocha.celestia.rpc.cumulo.me/"
-current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
-if [ -z "$current_block_rpc" ]; then
-    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
-fi
-
-{
-    echo "# HELP current_block_rpc Current block height from RPC"
-    echo "# TYPE current_block_rpc gauge"
-    echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
    
