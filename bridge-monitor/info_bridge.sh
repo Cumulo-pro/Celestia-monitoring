@@ -23,26 +23,6 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
-# Usar el directorio HOME del usuario que ejecuta el script
-USER_HOME=$(eval echo ~${SUDO_USER})
-
-# Comando para obtener el Node ID usando el store especificado
-NODE_ID=$(celestia p2p info --node.store $USER_HOME/.celestia-bridge-mocha-4/ | jq -r '.result.id')
-
-# Comprobar si se ha obtenido un Node ID válido
-if [ -z "$NODE_ID" ] || [ "$NODE_ID" == "null" ]; then
-    echo "Error: No se pudo obtener el Node ID."
-else
-    echo "Node ID: $NODE_ID"
-fi
-
-# Escribir el Node ID en el archivo de métricas temporal
-sudo bash -c "{
-    echo '# HELP node_id_info Node ID of the Celestia bridge node'
-    echo '# TYPE node_id_info gauge'
-    echo 'node_id_info{id=\"$NODE_ID\"} 1'
-} >> $temp_metrics_file"
-
 # Obtener el hash de la altura actual (Hash Current Height)
 hash_current_height=$(sudo journalctl -u celestia-bridge.service | grep 'new head' | tail -n 1 | awk -F 'hash": "' '{print $2}' | awk -F '"' '{print $1}')
 if [ -z "$hash_current_height" ];then
@@ -108,6 +88,23 @@ sudo bash -c "{
     echo 'connection_status $connection_status_value'
 } >> $temp_metrics_file"
 
+# Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
+bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{print $1 " " $2 " " $3}' | xargs -I {} date -d "{}" +%s)
+if [ -z "$bridge_start_date" ];then
+    bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
+fi
+
+# Obtener el tiempo actual
+current_time=$(date +%s)
+# Calcular el tiempo de actividad en segundos
+bridge_uptime_seconds=$((current_time - bridge_start_date))
+
+sudo bash -c "{
+    echo '# HELP bridge_uptime_seconds Total uptime of the Celestia bridge node in seconds'
+    echo '# TYPE bridge_uptime_seconds gauge'
+    echo 'bridge_uptime_seconds $bridge_uptime_seconds'
+} >> $temp_metrics_file"
+
 # Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
 timeout_errors=$(sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l)
 
@@ -133,13 +130,14 @@ sudo mv $temp_metrics_file $metrics_file
 sudo bash -c "cat <<EOF > $json_file
 {
     \"bridge_height\": \"$height\",
-    \"node_id\": \"$NODE_ID\",
     \"bridge_height_hash\": \"$hash_current_height\",
     \"latest_node_version\": \"$latest_node_version\",
     \"current_block_rpc\": \"$current_block_rpc\",
     \"node_chain_id\": \"$node_chain_id\",
     \"connection_status\": \"$connection_status_value\",
+    \"bridge_start_date\": \"$bridge_start_date\",
     \"timeout_errors\": \"$timeout_errors\",
-    \"connections_closed\": \"$connections_closed\"
+    \"connections_closed\": \"$connections_closed\",
+    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\"
 }
 EOF"
