@@ -33,6 +33,24 @@ fi
     echo "bridge_height_hash_info{hash=\"$hash_current_height\"} 1"
 } >> "$metrics_file"
 
+# Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
+timeout_errors=$(sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l)
+
+{
+    echo "# HELP timeout_errors Number of network connectivity timeout errors"
+    echo "# TYPE timeout_errors gauge"
+    echo "timeout_errors $timeout_errors"
+} >> "$metrics_file"
+
+# Obtener el número de conexiones cerradas por el host remoto (Number of connections closed by remote host)
+connections_closed=$(sudo journalctl -p err | grep -c 'Connection closed by remote host')
+
+{
+    echo "# HELP connections_closed Number of connections closed by the remote host"
+    echo "# TYPE connections_closed gauge"
+    echo "connections_closed $connections_closed"
+} >> "$metrics_file"
+
 # Obtener la altura actual del bloque desde el RPC de Celestia
 rpc_url="https://mocha.celestia.rpc.cumulo.me/"
 current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
@@ -98,23 +116,6 @@ fi
     echo "bridge_start_date $bridge_start_date"
 } >> "$metrics_file"
 
-# Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
-timeout_errors=$(sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l)
-
-{
-    echo "# HELP timeout_errors Number of network connectivity timeout errors"
-    echo "# TYPE timeout_errors gauge"
-    echo "timeout_errors $timeout_errors"
-} >> "$metrics_file"
-
-# Obtener el número de conexiones cerradas por el host remoto (Number of connections closed by remote host)
-connections_closed=$(sudo journalctl -p err | grep -c 'Connection closed by remote host')
-
-{
-    echo "# HELP connections_closed Number of connections closed by the remote host"
-    echo "# TYPE connections_closed gauge"
-    echo "connections_closed $connections_closed"
-} >> "$metrics_file"
 
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
