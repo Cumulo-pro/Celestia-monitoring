@@ -88,22 +88,19 @@ sudo bash -c "{
     echo 'connection_status $connection_status_value'
 } >> $temp_metrics_file"
 
-# Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
-bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{print $1 " " $2 " " $3}' | xargs -I {} date -d "{}" +%s)
-if [ -z "$bridge_start_date" ];then
-    bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
-fi
+# Obtener la fecha del último error de tiempo de espera de conectividad de red
+last_timeout_connectivity_error=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
 
-# Obtener el tiempo actual
-current_time=$(date +%s)
-# Calcular el tiempo de actividad en segundos
-bridge_uptime_seconds=$((current_time - bridge_start_date))
+# Convertir a milisegundos
+last_timeout_connectivity_error_ms=$((last_timeout_connectivity_error * 1000))
 
+# Escribir la métrica en el archivo de métricas temporal
 sudo bash -c "{
-    echo '# HELP bridge_uptime_seconds Total uptime of the Celestia bridge node in seconds'
-    echo '# TYPE bridge_uptime_seconds gauge'
-    echo 'bridge_uptime_seconds $bridge_uptime_seconds'
+    echo '# HELP last_timeout_connectivity_error Last network connectivity timeout error date'
+    echo '# TYPE last_timeout_connectivity_error gauge'
+    echo 'last_timeout_connectivity_error $last_timeout_connectivity_error_ms'
 } >> $temp_metrics_file"
+
 
 # Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
 timeout_errors=$(sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l)
