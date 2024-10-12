@@ -36,11 +36,11 @@ else
     echo "Node ID: $NODE_ID"
 fi
 
-# Escribir en el archivo de métricas temporal
+# Escribir el Node ID en el archivo de métricas temporal
 sudo bash -c "{
     echo '# HELP node_id_info Node ID of the Celestia bridge node'
     echo '# TYPE node_id_info gauge'
-    echo 'node_id_info{id=\"'$NODE_ID'\"} 1'
+    echo 'node_id_info{id=\"$NODE_ID\"} 1'
 } >> $temp_metrics_file"
 
 # Obtener el hash de la altura actual (Hash Current Height)
