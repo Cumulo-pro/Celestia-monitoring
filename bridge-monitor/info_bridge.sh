@@ -33,6 +33,19 @@ fi
     echo "bridge_height_hash_info{hash=\"$hash_current_height\"} 1"
 } >> "$metrics_file"
 
+# Obtener la altura actual del bloque desde el RPC de Celestia
+rpc_url="https://mocha.celestia.rpc.cumulo.me/"
+current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
+if [ -z "$current_block_rpc" ];then
+    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
+fi
+
+{
+    echo "# HELP current_block_rpc Current block height from RPC"
+    echo "# TYPE current_block_rpc gauge"
+    echo "current_block_rpc $current_block_rpc"
+} >> "$metrics_file"
+
 # Intentar obtener la versión del nodo (Latest Node Version) desde el Bridge
 latest_node_version=$(sudo journalctl -u celestia-bridge.service | grep "node version:" | tail -n 1 | awk -F'node version: *' '{print $2}')
 if [ -z "$latest_node_version" ];then
@@ -101,19 +114,6 @@ connections_closed=$(sudo journalctl -p err | grep -c 'Connection closed by remo
     echo "# HELP connections_closed Number of connections closed by the remote host"
     echo "# TYPE connections_closed gauge"
     echo "connections_closed $connections_closed"
-} >> "$metrics_file"
-
-# Obtener la altura actual del bloque desde el RPC de Celestia
-rpc_url="https://mocha.celestia.rpc.cumulo.me/"
-current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
-if [ -z "$current_block_rpc" ];then
-    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
-fi
-
-{
-    echo "# HELP current_block_rpc Current block height from RPC"
-    echo "# TYPE current_block_rpc gauge"
-    echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
 # Guardar los valores en un archivo JSON
