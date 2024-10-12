@@ -84,6 +84,21 @@ fi
     echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
+# Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
+bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
+
+# Si no se obtiene el valor, leerlo del archivo JSON
+if [ -z "$bridge_start_date" ]; then
+    bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
+fi
+
+# Definir HELP y TYPE para la fecha de inicio del nodo en Prometheus
+{
+    echo "# HELP bridge_start_date Timestamp of when Celestia DA node started"
+    echo "# TYPE bridge_start_date gauge"
+    echo "bridge_start_date $bridge_start_date"
+} >> "$metrics_file"
+
     
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
@@ -93,6 +108,7 @@ cat <<EOF > "$json_file"
     "latest_node_version": "$latest_node_version",
     "current_block_rpc": "$current_block_rpc",
     "node_chain_id": "$node_chain_id",
-    "connection_status": "$connection_status_value"
+    "connection_status": "$connection_status_value",
+    "bridge_start_date": "$bridge_start_date"
 }
 EOF
