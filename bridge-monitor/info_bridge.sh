@@ -24,22 +24,31 @@ sudo bash -c "{
 } >> $temp_metrics_file"
 
 # Obtener la ID del nodo (Node ID) y depurar el resultado
-node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ 2>&1 | jq -r '.result.id')
+node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ 2>&1)
 
-# Verificar si el comando celestia devuelve un error
-if [ $? -ne 0 ]; then
-    echo "ERROR: Failed to get Node ID from celestia command."
-    node_id="null"
-else
-    echo "DEBUG: Node ID from celestia is $node_id"
-fi
+# Depuración del resultado bruto
+echo "DEBUG: Raw output from celestia command: $node_id"
 
-# Si la ID del nodo es vacía o "null", intentar obtenerla desde el JSON
-if [ -z "$node_id" ] || [ "$node_id" = "null" ]; then
-    echo "DEBUG: Node ID is empty or null, reading from JSON"
+# Extraer el valor correcto utilizando jq si no hay errores
+node_id_parsed=$(echo "$node_id" | jq -r '.result.id')
+
+# Verificar si jq falló al analizar el resultado
+if [ $? -ne 0 ] || [ -z "$node_id_parsed" ] || [ "$node_id_parsed" = "null" ]; then
+    echo "ERROR: Failed to parse Node ID from celestia output. Using fallback from JSON."
     node_id=$(jq -r '.node_id' "$json_file")
     echo "DEBUG: Node ID from JSON is $node_id"
+else
+    echo "DEBUG: Node ID from celestia is $node_id_parsed"
+    node_id="$node_id_parsed"
 fi
+
+# Escribir en el archivo de métricas temporal
+sudo bash -c "{
+    echo '# HELP node_id_info Node ID of the Celestia bridge node'
+    echo '# TYPE node_id_info gauge'
+    echo 'node_id_info{id=\"$node_id\"} 1'
+} >> $temp_metrics_file"
+
 
 # Escribir en el archivo de métricas temporal
 sudo bash -c "{
