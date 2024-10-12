@@ -28,15 +28,14 @@ node_id=$(sudo /usr/local/bin/celestia p2p info --node.store ~/.celestia-bridge-
 echo "DEBUG: Node ID is $node_id"  # Línea de depuración para verificar el valor
 
 if [ -z "$node_id" ] || [ "$node_id" = "null" ]; then
-    echo "DEBUG: Node ID is empty or null, falling back to JSON"
+    echo "DEBUG: Node ID is empty or null, reading from JSON"
     node_id=$(jq -r '.node_id' "$json_file")
+    echo "DEBUG: Node ID from JSON is $node_id"
 fi
 
-echo "DEBUG: Final Node ID is $node_id"  # Verificar si el valor se obtiene correctamente
-
 sudo bash -c "{
-    echo '# HELP node_id Celestia node ID'
-    echo '# TYPE node_id gauge'
+    echo '# HELP node_id_info Node ID of the Celestia bridge node'
+    echo '# TYPE node_id_info gauge'
     echo 'node_id_info{id=\"$node_id\"} 1'
 } >> $temp_metrics_file"
 
