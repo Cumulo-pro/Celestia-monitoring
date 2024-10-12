@@ -141,6 +141,35 @@ sudo bash -c "{
     echo 'archival_peer_count $archival_peer_count'
 } >> $temp_metrics_file"
 
+# Obtener el tamaño de wantlist y overflow (wantlistSize y overflowSize)
+wantlist_output=$(sudo journalctl -u celestia-bridge.service | grep "wantlistSize" | tail -n 1)
+
+wantlist_size=$(echo "$wantlist_output" | awk -F 'wantlistSize": ' '{print $2}' | awk -F ',' '{print $1}')
+overflow_size=$(echo "$wantlist_output" | awk -F 'overflowSize": ' '{print $2}' | awk -F '}' '{print $1}')
+
+# Si no se obtienen los valores, definir valores por defecto de 0
+if [ -z "$wantlist_size" ]; then
+    wantlist_size=0
+fi
+
+if [ -z "$overflow_size" ]; then
+    overflow_size=0
+fi
+
+# Escribir en el archivo de métricas temporal
+sudo bash -c "{
+    echo '# HELP wantlist_size Current size of the wantlist in the Celestia bridge node'
+    echo '# TYPE wantlist_size gauge'
+    echo 'wantlist_size $wantlist_size'
+} >> $temp_metrics_file"
+
+sudo bash -c "{
+    echo '# HELP overflow_size Current size of the overflow list in the Celestia bridge node'
+    echo '# TYPE overflow_size gauge'
+    echo 'overflow_size $overflow_size'
+} >> $temp_metrics_file"
+
+
 
 # Mover el archivo temporal al archivo final
 sudo mv $temp_metrics_file $metrics_file
