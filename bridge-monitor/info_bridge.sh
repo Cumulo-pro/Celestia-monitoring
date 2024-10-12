@@ -123,6 +123,18 @@ sudo bash -c "{
     echo 'connections_closed $connections_closed'
 } >> $temp_metrics_file"
 
+# Obtener la fecha del último error de tiempo de espera de conectividad de red (Last network connectivity timeout error date)
+last_timeout_error_date=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
+if [ -z "$last_timeout_error_date" ]; then
+    last_timeout_error_date=$(jq -r '.last_timeout_error_date' "$json_file")
+fi
+
+sudo bash -c "{
+    echo '# HELP last_timeout_error_date Timestamp of the last network connectivity timeout error'
+    echo '# TYPE last_timeout_error_date gauge'
+    echo 'last_timeout_error_date $last_timeout_error_date'
+} >> $temp_metrics_file"
+
 # Mover el archivo temporal al archivo final
 sudo mv $temp_metrics_file $metrics_file
 
@@ -138,6 +150,7 @@ sudo bash -c "cat <<EOF > $json_file
     \"bridge_start_date\": \"$bridge_start_date\",
     \"timeout_errors\": \"$timeout_errors\",
     \"connections_closed\": \"$connections_closed\",
-    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\"
+    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\",
+    \"last_timeout_error_date\": \"$last_timeout_error_date\"
 }
 EOF"
