@@ -88,20 +88,6 @@ sudo bash -c "{
     echo 'connection_status $connection_status_value'
 } >> $temp_metrics_file"
 
-# Obtener la fecha del último error de conectividad de red (Last network connectivity timeout error date)
-last_timeout_error_date=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
-
-# Convertir el timestamp de segundos a milisegundos
-last_timeout_error_date_ms=$((last_timeout_error_date * 1000))
-
-sudo bash -c "{
-    echo '# HELP last_timeout_error_date Timestamp of the last network connectivity timeout error'
-    echo '# TYPE last_timeout_error_date gauge'
-    echo 'last_timeout_error_date $last_timeout_error_date_ms'
-} >> $temp_metrics_file"
-
-
-
 # Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
 timeout_errors=$(sudo journalctl -p err | grep 'Timeout occurred while waiting for network connectivity' | wc -l)
 
@@ -120,16 +106,16 @@ sudo bash -c "{
     echo 'connections_closed $connections_closed'
 } >> $temp_metrics_file"
 
-# Obtener la fecha del último error de tiempo de espera de conectividad de red (Last network connectivity timeout error date)
+# Obtener la fecha del último error de conectividad de red (Last network connectivity timeout error date)
 last_timeout_error_date=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
-if [ -z "$last_timeout_error_date" ]; then
-    last_timeout_error_date=$(jq -r '.last_timeout_error_date' "$json_file")
-fi
+
+# Convertir el timestamp de segundos a milisegundos
+last_timeout_error_date_ms=$((last_timeout_error_date * 1000))
 
 sudo bash -c "{
     echo '# HELP last_timeout_error_date Timestamp of the last network connectivity timeout error'
     echo '# TYPE last_timeout_error_date gauge'
-    echo 'last_timeout_error_date $last_timeout_error_date'
+    echo 'last_timeout_error_date $last_timeout_error_date_ms'
 } >> $temp_metrics_file"
 
 # Mover el archivo temporal al archivo final
