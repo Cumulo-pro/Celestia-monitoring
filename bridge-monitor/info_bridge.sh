@@ -24,7 +24,8 @@ sudo bash -c "{
 } >> $temp_metrics_file"
 
 # Obtener la ID del nodo (Node ID) usando la ruta de almacenamiento con sudo
-node_id=$(celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ | jq -r '.result.id')
+# Ejecutar celestia p2p info utilizando la ruta del nodo
+node_id=$(sudo -u $(whoami) /usr/local/bin/celestia p2p info --node.store "$node_store_path" 2>&1)
 
 # Escribir en el archivo de métricas temporal
 sudo bash -c "{
