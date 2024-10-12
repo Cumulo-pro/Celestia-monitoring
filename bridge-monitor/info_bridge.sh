@@ -83,12 +83,10 @@ fi
 # Comprobar si el valor de connection_status_value se calcula correctamente
 echo "Connection status value: $connection_status_value"
 
-{
-    echo "# HELP connection_status Status of the connection (1 for established, 0 otherwise)"
-    echo "# TYPE connection_status gauge"
-    echo "connection_status $connection_status_value"
-} >> "$metrics_file"
-
+    echo "# HELP connection_status Status of the connection (1 for established, 0 otherwise)" >> "$metrics_file"
+    echo "# TYPE connection_status gauge" >> "$metrics_file"
+    echo "connection_status $connection_status_value" >> "$metrics_file"
+    
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
 {
