@@ -25,7 +25,10 @@ sudo bash -c "{
 
 # Obtener el Node ID del nodo Celestia
 node_id=$(celestia p2p info --node.store ~/.celestia-bridge-mocha-4/ | jq -r '.result.id')
-if [ -z "$node_id" ]; then
+
+# Verifica si el node_id se obtuvo correctamente
+if [ -z "$node_id" ] || [ "$node_id" = "null" ]; then
+    echo "Advertencia: No se pudo obtener el Node ID. Se utilizará el valor del archivo JSON."
     node_id=$(jq -r '.node_id' "$json_file")
 fi
 
