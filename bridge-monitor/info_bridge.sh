@@ -124,7 +124,7 @@ sudo bash -c "{
 } >> $temp_metrics_file"
 
 # Obtener el conteo de peers completos (Full Peer Count)
-full_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "full" | wc -l)
+full_peer_count=$(sudo journalctl -u celestia-bridge.service | grep "full" | tail -n 1 | awk -F'"amount": ' '{print $2}' | awk -F'}' '{print $1}')
 
 sudo bash -c "{
     echo '# HELP full_peer_count Number of full peers connected'
