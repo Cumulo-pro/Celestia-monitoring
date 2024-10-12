@@ -71,19 +71,6 @@ fi
     echo "# TYPE connection_status gauge" >> "$metrics_file"
     echo "connection_status $connection_status_value" >> "$metrics_file"
 
-# Obtener la altura actual del bloque desde el RPC de Celestia
-rpc_url="https://mocha.celestia.rpc.cumulo.me/"
-current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
-if [ -z "$current_block_rpc" ]; then
-    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
-fi
-
-{
-    echo "# HELP current_block_rpc Current block height from RPC"
-    echo "# TYPE current_block_rpc gauge"
-    echo "current_block_rpc $current_block_rpc"
-} >> "$metrics_file"
-
 # Obtener la fecha de inicio del nodo Celestia Bridge (Bridge Node Start Date)
 bridge_start_date=$(sudo journalctl -u celestia-bridge.service | grep "Started celestia DA node" | tail -n 1 | awk '{ "date -d \""$1" "$2" "$3"\" +\"%s\"" | getline date; print date}')
 
@@ -99,7 +86,20 @@ fi
     echo "bridge_start_date $bridge_start_date"
 } >> "$metrics_file"
 
-    
+# Obtener la altura actual del bloque desde el RPC de Celestia
+rpc_url="https://mocha.celestia.rpc.cumulo.me/"
+current_block_rpc=$(curl -s -X POST $rpc_url -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","id":1,"method":"status"}' | jq -r '.result.sync_info.latest_block_height')
+if [ -z "$current_block_rpc" ]; then
+    current_block_rpc=$(jq -r '.current_block_rpc' "$json_file")
+fi
+
+{
+    echo "# HELP current_block_rpc Current block height from RPC"
+    echo "# TYPE current_block_rpc gauge"
+    echo "current_block_rpc $current_block_rpc"
+} >> "$metrics_file"
+
+   
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
 {
