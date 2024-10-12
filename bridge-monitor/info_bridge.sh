@@ -147,7 +147,7 @@ sudo mv $temp_metrics_file $metrics_file
 sudo bash -c "cat <<EOF > $json_file
 {
     \"bridge_height\": \"$height\",
-    \"node_id\": \"$node_id\",
+    \"node_id\": \"$NODE_ID\",
     \"bridge_height_hash\": \"$hash_current_height\",
     \"latest_node_version\": \"$latest_node_version\",
     \"current_block_rpc\": \"$current_block_rpc\",
