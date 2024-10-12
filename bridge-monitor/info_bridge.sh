@@ -94,10 +94,15 @@ if [ -z "$bridge_start_date" ];then
     bridge_start_date=$(jq -r '.bridge_start_date' "$json_file")
 fi
 
+# Obtener el tiempo actual
+current_time=$(date +%s)
+# Calcular el tiempo de actividad en segundos
+bridge_uptime_seconds=$((current_time - bridge_start_date))
+
 sudo bash -c "{
-    echo '# HELP bridge_start_date Timestamp of when Celestia DA node started'
-    echo '# TYPE bridge_start_date gauge'
-    echo 'bridge_start_date $bridge_start_date'
+    echo '# HELP bridge_uptime_seconds Total uptime of the Celestia bridge node in seconds'
+    echo '# TYPE bridge_uptime_seconds gauge'
+    echo 'bridge_uptime_seconds $bridge_uptime_seconds'
 } >> $temp_metrics_file"
 
 # Obtener el número de errores de tiempo de espera de conectividad de red (Number of network connectivity timeout errors)
@@ -132,6 +137,7 @@ sudo bash -c "cat <<EOF > $json_file
     \"connection_status\": \"$connection_status_value\",
     \"bridge_start_date\": \"$bridge_start_date\",
     \"timeout_errors\": \"$timeout_errors\",
-    \"connections_closed\": \"$connections_closed\"
+    \"connections_closed\": \"$connections_closed\",
+    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\"
 }
 EOF"
