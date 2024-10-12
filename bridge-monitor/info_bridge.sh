@@ -23,8 +23,6 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
-#!/bin/bash
-
 # Usar el directorio HOME del usuario que ejecuta el script
 USER_HOME=$(eval echo ~${SUDO_USER})
 
@@ -42,7 +40,7 @@ fi
 sudo bash -c "{
     echo '# HELP node_id_info Node ID of the Celestia bridge node'
     echo '# TYPE node_id_info gauge'
-    echo 'node_id_info{id=\"$NODE_ID\"} 1'
+    echo 'node_id_info{id=\"'$NODE_ID'\"} 1'
 } >> $temp_metrics_file"
 
 # Obtener el hash de la altura actual (Hash Current Height)
@@ -128,18 +126,6 @@ sudo bash -c "{
     echo 'connections_closed $connections_closed'
 } >> $temp_metrics_file"
 
-# Obtener la fecha del último error de conectividad de red (Last network connectivity timeout error date)
-last_timeout_error_date=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
-
-# Convertir el timestamp de segundos a milisegundos
-last_timeout_error_date_ms=$((last_timeout_error_date * 1000))
-
-sudo bash -c "{
-    echo '# HELP last_timeout_error_date Timestamp of the last network connectivity timeout error'
-    echo '# TYPE last_timeout_error_date gauge'
-    echo 'last_timeout_error_date $last_timeout_error_date_ms'
-} >> $temp_metrics_file"
-
 # Mover el archivo temporal al archivo final
 sudo mv $temp_metrics_file $metrics_file
 
@@ -153,10 +139,7 @@ sudo bash -c "cat <<EOF > $json_file
     \"current_block_rpc\": \"$current_block_rpc\",
     \"node_chain_id\": \"$node_chain_id\",
     \"connection_status\": \"$connection_status_value\",
-    \"bridge_start_date\": \"$bridge_start_date\",
     \"timeout_errors\": \"$timeout_errors\",
-    \"connections_closed\": \"$connections_closed\",
-    \"bridge_uptime_seconds\": \"$bridge_uptime_seconds\",
-    \"last_timeout_error_date\": \"$last_timeout_error_date\"
+    \"connections_closed\": \"$connections_closed\"
 }
 EOF"
