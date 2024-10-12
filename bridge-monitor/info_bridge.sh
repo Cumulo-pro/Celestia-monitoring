@@ -169,6 +169,17 @@ sudo bash -c "{
     echo 'overflow_size $overflow_size'
 } >> $temp_metrics_file"
 
+# Obtener la fecha del último error de conectividad de red (Last network connectivity timeout error date)
+last_timeout_error_date=$(sudo journalctl -p err | awk '/Timeout occurred while waiting for network connectivity/ {date=$1 " " $2 " " $3} END {print date}' | xargs -I {} date -d "{}" +%s)
+
+# Convertir el timestamp de segundos a milisegundos
+last_timeout_error_date_ms=$((last_timeout_error_date * 1000))
+
+sudo bash -c "{
+    echo '# HELP last_timeout_error_date Timestamp of the last network connectivity timeout error'
+    echo '# TYPE last_timeout_error_date gauge'
+    echo 'last_timeout_error_date $last_timeout_error_date_ms'
+} >> $temp_metrics_file"
 
 
 # Mover el archivo temporal al archivo final
@@ -190,6 +201,7 @@ sudo bash -c "cat <<EOF > $json_file
     \"full_peer_count\": \"$full_peer_count\",
     \"archival_peer_count\": \"$archival_peer_count\",
      \"wantlist_size\": \"$wantlist_size\",
-    \"overflow_size\": \"$overflow_size\"
+    \"overflow_size\": \"$overflow_size\",
+     \"last_timeout_error_date\": \"$last_timeout_error_date_ms\"
 }
 EOF"
