@@ -84,6 +84,23 @@ fi
     echo "current_block_rpc $current_block_rpc"
 } >> "$metrics_file"
 
+# Obtener el estado de la conexión (Connection Status)
+connection_status=$(sudo journalctl -u celestia-bridge.service | grep "CANONICAL_PEER_STATUS:" | awk -F'connection_status="' '{print $2}' | cut -d'"' -f1 | tail -n 1)
+
+# Convertir el estado a 1 si es "established", de lo contrario 0
+if [ "$connection_status" = "established" ]; then
+    connection_status_value=1
+else
+    connection_status_value=0
+fi
+
+# Definir HELP y TYPE para el estado de la conexión en Prometheus
+{
+    echo "# HELP connection_status Status of the connection (1 for established, 0 otherwise)"
+    echo "# TYPE connection_status gauge"
+    echo "connection_status $connection_status_value"
+} >> "$metrics_file"
+
 # Guardar los valores en un archivo JSON
 cat <<EOF > "$json_file"
 {
@@ -91,6 +108,7 @@ cat <<EOF > "$json_file"
     "bridge_height_hash": "$hash_current_height",
     "latest_node_version": "$latest_node_version",
     "current_block_rpc": "$current_block_rpc",
-    "node_chain_id": "$node_chain_id"
+    "node_chain_id": "$node_chain_id",
+    "connection_status": "$connection_status_value"
 }
 EOF
