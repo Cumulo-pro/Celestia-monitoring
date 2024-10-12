@@ -1,0 +1,62 @@
+groups:
+  - name: CelestiaBridgeAlerts
+    rules:
+      # Alert to check if the node is out of sync (difference between local height and RPC height)
+      - alert: BridgeNodeOutOfSync
+        expr: (current_block_rpc - bridge_height) > 100
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Celestia Bridge Node Out of Sync"
+          description: "The difference between the local block height and RPC block height is greater than 100 for more than 5 minutes. Check the node status."
+
+      # Alert to detect an increase in network connectivity timeout errors
+      - alert: HighTimeoutErrors
+        expr: increase(timeout_errors[10m]) > 5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Network Connectivity Timeout Errors in Celestia Bridge"
+          description: "More than 5 network connectivity timeout errors were detected in the last 10 minutes. Possible network issue."
+
+      # Alert to detect an increase in connections closed by the remote host
+      - alert: HighConnectionsClosed
+        expr: increase(connections_closed[10m]) > 5
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Connections Closed by Remote Host in Celestia Bridge"
+          description: "More than 5 connections were closed by the remote host in the last 10 minutes. Check network stability."
+
+      # Alert to check if the node has insufficient peers
+      - alert: LowPeerCount
+        expr: full_peer_count < 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low Full Peer Count in Celestia Bridge"
+          description: "The Celestia Bridge node has fewer than 3 full peers for more than 5 minutes."
+
+      # Alert to check if the node has had frequent wantlist overflow
+      - alert: FrequentWantlistOverflow
+        expr: increase(wantlist_overflow_size[10m]) > 50
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Frequent Wantlist Overflow in Celestia Bridge"
+          description: "Frequent wantlist overflow detected in the last 10 minutes. Possible data congestion in the network."
+
+      # Alert to monitor node uptime
+      - alert: NodeUptimeCheck
+        expr: bridge_uptime_seconds < 600
+        for: 10m
+        labels:
+          severity: info
+        annotations:
+          summary: "Celestia Bridge Node Recently Restarted"
+          description: "The node has been restarted within the last 10 minutes. Ensure everything is running smoothly."
