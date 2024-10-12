@@ -27,7 +27,7 @@ sudo bash -c "{
 node_store_path="$HOME/.celestia-bridge-mocha-4"
 
 # Obtener la ID del nodo (Node ID) usando la ruta de almacenamiento con sudo
-node_id=$(sudo /usr/local/bin/celestia p2p info --node.store "$node_store_path" 2>&1)
+node_id=$(celestia p2p info --node.store "$node_store_path" 2>&1)
 
 # Depuración del resultado bruto
 echo "DEBUG: Raw output from celestia command: $node_id"
@@ -51,7 +51,6 @@ sudo bash -c "{
     echo '# TYPE node_id_info gauge'
     echo 'node_id_info{id=\"$node_id\"} 1'
 } >> $temp_metrics_file"
-
 
 # Obtener el hash de la altura actual (Hash Current Height)
 hash_current_height=$(sudo journalctl -u celestia-bridge.service | grep 'new head' | tail -n 1 | awk -F 'hash": "' '{print $2}' | awk -F '"' '{print $1}')
