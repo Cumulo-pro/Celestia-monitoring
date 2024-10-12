@@ -23,8 +23,11 @@ sudo bash -c "{
     echo 'bridge_height $height'
 } >> $temp_metrics_file"
 
+# Obtener la ruta del directorio de almacenamiento del nodo Celestia
+node_store_path="$HOME/.celestia-bridge-mocha-4"
+
 # Obtener la ID del nodo (Node ID) y depurar el resultado
-node_id=$(sudo /usr/local/bin/celestia p2p info --node.store /home/arixcum6XL-2/.celestia-bridge-mocha-4/ 2>&1)
+node_id=$(sudo /usr/local/bin/celestia p2p info --node.store $node_store_path 2>&1)
 
 # Depuración del resultado bruto
 echo "DEBUG: Raw output from celestia command: $node_id"
@@ -48,7 +51,6 @@ sudo bash -c "{
     echo '# TYPE node_id_info gauge'
     echo 'node_id_info{id=\"$node_id\"} 1'
 } >> $temp_metrics_file"
-
 
 # Escribir en el archivo de métricas temporal
 sudo bash -c "{
