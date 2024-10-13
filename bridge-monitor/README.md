@@ -52,4 +52,5 @@ The system is designed to update the metrics periodically and automatically usin
 
 With these features, this project provides an efficient and effective solution for monitoring custom metrics of the bridge node, leveraging the capabilities of Prometheus and Node Exporter to enhance the monitoring and maintenance of your infrastructure.
 
-![bridge1](https://github.com/Cumulo-pro/Celestia-monitoring/assets/2853158/78eee11f-648c-4447-851e-e2c8d92a667b)
+![image](https://github.com/user-attachments/assets/97982cb5-7eb1-42e7-aa42-5eb112fb743a)
+
