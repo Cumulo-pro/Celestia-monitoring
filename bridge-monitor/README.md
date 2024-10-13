@@ -52,5 +52,6 @@ The system is designed to update the metrics periodically and automatically usin
 
 With these features, this project provides an efficient and effective solution for monitoring custom metrics of the bridge node, leveraging the capabilities of Prometheus and Node Exporter to enhance the monitoring and maintenance of your infrastructure.
 
-![image](https://github.com/user-attachments/assets/97982cb5-7eb1-42e7-aa42-5eb112fb743a)
+![image](https://github.com/user-attachments/assets/7e44f352-9156-4b86-b118-3142504dff10)
+
 
