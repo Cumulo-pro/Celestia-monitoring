@@ -22,7 +22,7 @@ System for monitoring custom metrics for a bridge node using Prometheus and Node
 
   System for monitoring custom metrics for a bridge node using Prometheus and Node Exporter. Node Exporter is a powerful tool that collects operating system and hardware metrics from servers and can also be extended to expose custom metrics.
 
-- **[get_bridge_height.sh](https://raw.githubusercontent.com/Cumulo-pro/Celestia-monitoring/main/bridge-monitor/get_bridge_height.sh)**
+- **[info_bridge.sh](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/info_bridge.sh)**
 
   Bash script designed to collect various metrics related to the celestia-bridge service and save this data in a metrics file in Prometheus format.
 
