@@ -36,6 +36,8 @@ System for monitoring custom metrics for a bridge node using Prometheus and Node
 
 - **[CLI queries to a Celestia bridge node](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/bridge-queries.md)**
 
+  Set of commands to perform different queries to a Celestia bridge node.
+
 ## Features
 
 ### Non-Intrusive Method
