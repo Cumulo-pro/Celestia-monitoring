@@ -29,7 +29,8 @@ System for monitoring custom metrics for a bridge node using Prometheus and Node
 - **[Celestia Bridge Node Alert Configuration Guide](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/alert_guide.md)**
 
   This guide explains how to set up alert rules for a Celestia Bridge node using Prometheus.
-  
+
+- **celestia_bridge_alerts.yml**  
 
 ## Features
 
