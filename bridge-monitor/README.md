@@ -26,7 +26,7 @@ System for monitoring custom metrics for a bridge node using Prometheus and Node
 
   Bash script designed to collect various metrics related to the celestia-bridge service and save this data in a metrics file in Prometheus format.
 
-- **Celestia Bridge Node Alert Configuration Guide**
+- **[Celestia Bridge Node Alert Configuration Guide](https://github.com/Cumulo-pro/Celestia-monitoring/blob/main/bridge-monitor/alert_guide.md)**
 
 ## Features
 
