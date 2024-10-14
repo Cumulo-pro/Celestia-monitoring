@@ -18,7 +18,7 @@ System for monitoring custom metrics for a bridge node using Prometheus and Node
 
   This resource provides a JSON configuration file for a Grafana dashboard. The file includes all the necessary definitions and settings to visualize bridge node metrics in Grafana, making it easy to create informative panels and interactive graphs for real-time monitoring.
 
-- **[Grafana Dashboard: Celestia Bridge Node](https://grafana.com/grafana/dashboards/21178-celestia-bridge-node-v2/)**
+- **[Grafana Dashboard: Celestia Bridge Node](https://grafana.com/grafana/dashboards/22070-celestia-bridge-node-v3/)**
 
   System for monitoring custom metrics for a bridge node using Prometheus and Node Exporter. Node Exporter is a powerful tool that collects operating system and hardware metrics from servers and can also be extended to expose custom metrics.
 
