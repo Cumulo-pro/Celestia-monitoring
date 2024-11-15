@@ -177,7 +177,7 @@ Value: number representing the total power of all validators in the Celestia con
 
 ##  Consensus Validators  
 
-**celestia_consensus_validators{job="$job"}**
+**celestia_consensus_validators**
 
 Total number of active validators in the Celestia consensus
 
